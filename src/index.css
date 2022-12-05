@@ -1,0 +1,14 @@
+:root {
+  width: 100vw;
+  min-height: 100vh;
+
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  width: 100vw;
+  min-height: 100vh;
+}

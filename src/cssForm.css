@@ -1,0 +1,129 @@
+.contForm {
+  background-color: rgb(126, 40, 172);
+  text-align: center;
+  border-radius: 10%;
+  padding: 20px;
+  z-index: 100;
+  position: absolute;
+  text-align: center;
+  transition: all 750ms ease;
+
+}
+
+.visible {
+  visibility: hidden;
+}
+
+.contForm input {
+
+  border-radius: 20px;
+
+  color: aliceblue;
+  font-size: 20px;
+  text-align: center;
+
+}
+
+.contenedor {
+  position: relative;
+}
+
+.contForm {
+  margin-top: 35px;
+  position: absolute;
+  left: -160px;
+
+}
+
+
+
+
+
+
+.contBtn {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+
+}
+
+
+.btn {
+
+  position: relative;
+  display: block;
+  min-height: 50px;
+  max-width: 300px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  background-color: transparent;
+  color: #fff;
+  font-size: 28px;
+  overflow: hidden;
+  transition: all 500ms ease;
+  border: 2px solid #6a0684;
+
+  z-index: 0;
+  font-weight: 200;
+  cursor: pointer;
+  border-radius: 28px;
+  padding: 2%;
+
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  right: 0;
+  top: 0;
+  margin: auto;
+  background-color: #770fa7 !important;
+  transition: all 500ms ease;
+  z-index: -1;
+}
+
+.btn--1::before {
+  width: 0;
+  height: 100%;
+}
+
+.btn--1:hover {
+
+  color: #0f0d0d !important;
+  text-shadow: 0px 1px 5px whitesmoke !important;
+  font-weight: bolder;
+
+}
+
+.btn--1:hover::before {
+  width: 100%;
+}
+
+.btn--2:hover {
+  background-color: #b71dd9;
+  box-shadow: 0 0 10px #a50384, 0 0 20px #c414f0, 0 0 20px #b81ee7;
+  color: #efefef;
+  text-shadow: 0px 1px 5px whitesmoke !important;
+}
+
+.btn--3:hover {
+  animation: shadow-pulse 1000ms 1;
+  background-color: #840dac;
+  color: #434343;
+}
+
+.btn--4::before {
+
+  left: -520px;
+  right: 0;
+  width: 100%;
+  min-height: 150%;
+  transition: all 750ms ease;
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px #e220a8, 0 0 20px #e220cb, 0 0 20px #70059a;
+}
+
+.btn--4:hover::before {
+  left: 520px;
+}
