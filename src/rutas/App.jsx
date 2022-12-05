@@ -6,6 +6,10 @@ import Swal from 'sweetalert2'
 import { useState, useEffect } from 'react';
 import { useAjax } from '../hooks/useAjax';
 import { Link } from "react-router-dom";
+import DataTime from '../hooks/Datatime';
+
+// fecha=new Data();
+// console.log(fecha)
 
 function App() {
 
@@ -16,7 +20,8 @@ function App() {
     costoM2: "",
     propiedad: "",
     ubicaciones: "",
-    metros2: ""
+    metros2: "",
+    fecha:""
   }
 
   const [cotiza, setcotiza] = useState(objetoCotizar);
@@ -80,15 +85,23 @@ function App() {
     return true
   }
 
+  const recargaDatos = (fecha) => {
+    let propiedad = data.propiedades.filter((props) => { if (props.factor == cotiza.propiedad) { return props } });
+    console.log(propiedad[0].tipo);
+    let ubicaciones = data.ubicaciones.filter((props) => { if (props.factor == cotiza.ubicaciones) { return props } });
+
+    log
+    setcotiza((set) => ({ ...set, propiedad: propiedad[0].tipo, ubicaciones: ubicaciones[0].tipo,fecha }))
+    console.log("alta mierda", cotiza);
+  }
+
 
   const funcionCotizar = (e) => {
     e.preventDefault();
-
     if (sertifica()) {
       setDemora((set) => set = false)
-
-      setTimeout(() => {
-        setDemora((set) => set = true)
+        setTimeout(() => {
+         setDemora((set) => set = true)
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -101,15 +114,10 @@ function App() {
 
       const resultado = ((+data.costoM2) * (+cotiza.propiedad) * (+cotiza.ubicaciones) * (+cotiza.metros2)).toFixed(2);
       setcotiza((set) => ({ ...set, costoM2: resultado }))
-      // alert("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!","cotiza.costoM2",data.costoM2);
+      
+ let fecha = DataTime();
 
-      let propiedad = data.propiedades.filter((props) => { if (props.factor == cotiza.propiedad) { return props } });
-      console.log(propiedad[0].tipo);
-      let ubicaciones = data.ubicaciones.filter((props) => { if (props.factor == cotiza.ubicaciones) { return props } });
-
-
-      setcotiza((set) => ({ ...set, propiedad: propiedad[0].tipo, ubicaciones: ubicaciones[0].tipo }))
-      console.log("alta mierda", cotiza);
+      recargaDatos(fecha)
 
     }
   };
