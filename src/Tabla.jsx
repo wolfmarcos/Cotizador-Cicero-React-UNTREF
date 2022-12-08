@@ -6,11 +6,11 @@ const Tabla = ({ data, ide }) => {
         <tbody>
             <tr key={ide}>
 
-                <td>fecha:{fecha}</td> 
-                <td>propiedad: {propiedad}</td>
-                <td>ubicaciones: {ubicaciones}</td>
-                <td>metros2: {metros2}</td>
-                <td>cotizaciones:$ {costoM2} </td>
+                <td>{fecha}</td>
+                <td>{propiedad}</td>
+                <td>{ubicaciones}</td>
+                <td>{metros2}</td>
+                <td>$ {costoM2} </td>
 
             </tr>
 

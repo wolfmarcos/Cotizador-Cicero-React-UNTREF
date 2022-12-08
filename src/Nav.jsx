@@ -1,50 +1,59 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
- import Login2 from "./Login2";
+import { useState, useReft } from "react";
+import Login2 from "./Login2";
+import { auth, desLogoGoogle } from "./hooks/firebase-config";
+
+const desLogo = () => {
+  desLogoGoogle();
+
+};
+
+
 
 function Nav() {
 
-    const [activa, setactiva] = useState(false)
-    const activar = () => {
-        setactiva(!activa)
+  const [activa, setactiva] = useState(false);
+  const activar = () => {
+    setactiva(!activa);
+  };
 
-    }
+  return (
+    <nav>
+      <div></div>
 
-
-    return (
-        <nav>
-            <div>
-
-            </div>
-
-            <div>
-                <NavLink className={({ isActive }) => isActive ? "button " : "button blanco "} to="./cotizador">
-                    Cotizador
-                </NavLink>
-                <NavLink className={({ isActive }) => isActive ? "button " : "button blanco "} to="./historial">
-                    Historial
-                </NavLink>
-
-
-            </div>
-            <div className="contenedor">
-                <div onClick={activar} className="button button-outline   " >Login</div>
-
-                {activa? <Login2 activa={activar}/> : null}
-            </div>
-            <div>
-
-            </div>
-        </nav>
+      <div>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "button " : "button blanco "
+          }
+          to="./cotizador"
+        >
+          Cotizador
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "button " : "button blanco "
+          }
+          to="./historial"
+        >
+          Historial
+        </NavLink>
+      </div>
+      <div className="contenedor">
 
 
+        <div onClick={activar} className="button button-outline   ">
+          Login
+        </div>
 
+        <div onClick={desLogo} className="button button-outline "> deslogeo</div>
 
-    );
+        {activa ? <Login2 activa={activar} /> : null}
+      </div>
+      <div></div>
+    </nav>
+  );
 }
 
 export default Nav;
-{/* <NavLink isactive={ ()=>activar(isActive) }>
-to={"./cotizador"}
-</NavLink> */}
