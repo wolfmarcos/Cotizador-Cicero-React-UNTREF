@@ -15,25 +15,22 @@ export default function ErrorPage() {
     <div className=" center div-cotizador">
       <div className="historial">
         {" "}
-        <span title="Ver Historial">
-          <Link to="/">
-            <button class="button button-outline">volver</button>
-          </Link>
-
-          <Link to="/historial">📋</Link>
-        </span>
+        <span title="Ver Historial"></span>
       </div>
-      <h1 className="center separador">Seguros del hogar 🏡</h1>
+      <h2 className="center separador">Seguros del hogar 🏡</h2>
 
-      <h1>Epa!</h1>
-      <p>Lo sentimos, ocurrió un error inesperado.</p>
+      <h1>Louding...</h1>
 
+      <Link to="/historial">📋</Link>
+      <Link to="/">
+        <button class="button button-outline">volver</button>
+      </Link>
       <img
-        style={{ width: "500px" }}
-        src="/jungle-404.gif"
+        style={{ width: "500px", objectFit: "cover"}}
+        src="cargamdop.gif"
         alt="page not found"
       />
-      {/* <button onClick={() => navigate(-1)}>Volver</button> */}
+      <button onClick={() => navigate(-1)}>Volver</button>
     </div>
   );
 }

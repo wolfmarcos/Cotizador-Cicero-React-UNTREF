@@ -1,7 +1,7 @@
 import "./cssForm.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { setCities, gle ,logeo} from "./hooks/firebase-config";
+import {  gle ,logeo} from "./hooks/firebase-config";
 
 function Login2({ activa }) {
   const [ususrio, setususrio] = useState({ email: "", password: "", id: "" });
@@ -17,7 +17,7 @@ function Login2({ activa }) {
       return false;
     }
 
-    if ((!/(?=(.*[0-9]))(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{4,20}/.test(password))) {
+        if ((!/(?=(.*[0-9]))(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{4,20}/.test(password))) {
       Swal.fire({ title: "Contraseña invalida", icon: "warning" });
       return false;
     }
@@ -32,6 +32,7 @@ function Login2({ activa }) {
       const id = 1;
       setususrio((set) => ({ ...set, email, password, id }));
       Swal.fire({ title: "Logeado", icon: 'success' });
+      
       activa();
       logeo(email, password)
     }

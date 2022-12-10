@@ -2,17 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useState, useReft } from "react";
 import Login2 from "./Login2";
-import { auth, desLogoGoogle } from "./hooks/firebase-config";
+import {  desLogoGoogle } from "./hooks/firebase-config";
 
 const desLogo = () => {
   desLogoGoogle();
-
 };
 
-
-
 function Nav() {
-
   const [activa, setactiva] = useState(false);
   const activar = () => {
     setactiva(!activa);
@@ -41,13 +37,14 @@ function Nav() {
         </NavLink>
       </div>
       <div className="contenedor">
-
-
         <div onClick={activar} className="button button-outline   ">
           Login
         </div>
 
-        <div onClick={desLogo} className="button button-outline "> deslogeo</div>
+        <div onClick={desLogo} className="button button-outline ">
+          {" "}
+          deslogeo
+        </div>
 
         {activa ? <Login2 activa={activar} /> : null}
       </div>
