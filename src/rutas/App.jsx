@@ -5,103 +5,62 @@ import { useState, useEffect } from "react";
 import { useAjax } from "../hooks/useAjax";
 import { Link } from "react-router-dom";
 import DataTime from "../hooks/Datatime";
-import { usegetDatos ,setDatos } from "../hooks/firebase-config";
+import { usegetDatos, setDatos } from "../hooks/firebase-config";
 
 function App() {
-  
   ////////////
   const objetoCotizar = {
     costoM2: "",
     propiedad: "",
     ubicaciones: "",
     metros2: "",
-    fecha: DataTime()
+    fecha: DataTime(),
   };
   const [cotiza, setcotiza] = useState(objetoCotizar);
 
-  const items = JSON.parse(localStorage.getItem('items')) || [];
+  const items = JSON.parse(localStorage.getItem("items")) || [];
 
-  const [guardadoCotizacion, setguardadoCotizacion] = useState(items)
-
+  const [guardadoCotizacion, setguardadoCotizacion] = useState(items);
+  const [longitudDato, setlongitudDato] = useState(0);
   useEffect(() => {
-    setDatos(guardadoCotizacion)
-    localStorage.setItem('items', JSON.stringify(guardadoCotizacion));
+    setDatos(guardadoCotizacion);
+    localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
   }, [guardadoCotizacion]);
-////////////////////////////////
+  ////////////////////////////////
 
+  const [demora, setDemora] = useState(true);
 
-
-// const [cotiza, setcotiza] = useState(objetoCotizar);
-  
-  
-  
-  // const [ep, setEp] = useState(1)
-  const repe = () => {
-    setEp(set => (set = 2));
-  };
-  //  const items2 = JSON.parse(localStorage.getItem("items")) || [];
-  //  const items = data9 || JSON.parse(localStorage.getItem("items")) ||[objetoCotizar];
-  
-  // const [guardadoCotizacion, setguardadoCotizacion] = useState(items2);
-  
-  // if (error) return <h3>WTF 😫</h3>;
-  
-  
-  
-  //   // useEffect(() => {
-    //   //   localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
-    //   // }, [guardadoCotizacion]);
-    // }
-    
-    // if (error) return <h3>WTF 😫</h3>
-    //   // setguardadoCotizacion(...set, tomarDatos);
-    
-    
-    const [demora, setDemora] = useState(true);
-    
-    
-    
-    // useEffect(() => {
-  //   setDatos(guardadoCotizacion)
-  //   localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
-  // }, [guardadoCotizacion]);
-  
   const url2 = "https://api.npoint.io/2c789c463f2951308811";
-  
+
   const [data, isLoading] = useAjax(url2);
-  const longitud=guardadoCotizacion.length
-  // const [data9, error] = usegetDatos(longitud);
-  // console.log("esssssssssss1",data9)
-  const [longitudDato, setlongitudDato] = useState(0)
-  console.log(longitudDato);
+
+  console.log("1longg:", longitudDato);
+  console.log("local", items.length);
   const realizarGuardado = () => {
     Swal.fire({
       position: "top-end",
       icon: "success",
       title: "Cotizacion guardada exitosamente",
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
     });
     try {
-      const [data9, error] = usegetDatos(longitudDato);
-      
-      
-      console.log("esssssssssss2",guardadoCotizacion)
-      // setguardadoCotizacion(set => [...[...set, cotiza],...data9]);
-      setguardadoCotizacion(set => [...set, cotiza]);
-      const longitud=guardadoCotizacion.length
-      console.log(longitud);
-      setlongitudDato(longitud)
-      setguardadoCotizacion(set => [...set,...data9]);
-      console.log("esssssssssss3",guardadoCotizacion)
-    } catch (error) {
-      
-    }
+      console.log("esssssssssss2", guardadoCotizacion);
+
+      setguardadoCotizacion((set) => [...set, cotiza]);
+      setlongitudDato((set) => (set = items.length));
+      const [data9, error] = usegetDatos(items.length);
+      // const longitud = guardadoCotizacion;
+      console.log("2longg:", longitudDato);
+
+      setguardadoCotizacion((set) => [...set, ...data9]);
+      console.log("esssssssssss3", guardadoCotizacion);
+    } catch (error) {}
   };
   if (isLoading) return <h3>Loading...</h3>;
 
   function tomarData(e) {
-    setcotiza(set => ({ ...set, [e.target.name]: e.target.value }));
+    setcotiza((set) => ({ ...set, [e.target.name]: e.target.value }));
     // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!", cotiza);
   }
 
@@ -132,7 +91,7 @@ function App() {
     ) {
       Swal.fire({
         title: "no ingreso metros2 ,no modifique la pagina, gracis",
-        icon: "warning"
+        icon: "warning",
       });
       return false;
     }
@@ -141,38 +100,38 @@ function App() {
   };
 
   const recargaDatos = () => {
-    let propiedad = data.propiedades.filter(props => {
+    let propiedad = data.propiedades.filter((props) => {
       if (props.factor == cotiza.propiedad) {
         return props;
       }
     });
     console.log(propiedad[0].tipo);
-    let ubicaciones = data.ubicaciones.filter(props => {
+    let ubicaciones = data.ubicaciones.filter((props) => {
       if (props.factor == cotiza.ubicaciones) {
         return props;
       }
     });
 
-    setcotiza(set => ({
+    setcotiza((set) => ({
       ...set,
       propiedad: propiedad[0].tipo,
-      ubicaciones: ubicaciones[0].tipo
+      ubicaciones: ubicaciones[0].tipo,
     }));
     console.log("alta mierda", cotiza);
   };
 
-  const funcionCotizar = e => {
+  const funcionCotizar = (e) => {
     e.preventDefault();
     if (sertifica()) {
-      setDemora(set => (set = false));
+      setDemora((set) => (set = false));
       setTimeout(() => {
-        setDemora(set => (set = true));
+        setDemora((set) => (set = true));
         Swal.fire({
           position: "center",
           icon: "success",
           title: "Cotización realizada con éxito.",
           showConfirmButton: false,
-          timer: 1000
+          timer: 1000,
         });
       }, 1000);
 
@@ -182,7 +141,7 @@ function App() {
         +cotiza.ubicaciones *
         +cotiza.metros2
       ).toFixed(2);
-      setcotiza(set => ({ ...set, costoM2: resultado }));
+      setcotiza((set) => ({ ...set, costoM2: resultado }));
     }
     recargaDatos();
   };
@@ -200,7 +159,10 @@ function App() {
       {guardadoCotizacion.length > 0 && (
         <div className="historial">
           <span title="Ver Historial">
-            <Link to="/historial">📋 </Link>
+            <Link to="/historial">
+              📋
+              <div className="btn btn--1">{longitudDato}</div>
+            </Link>
           </span>
         </div>
       )}
@@ -231,9 +193,7 @@ function App() {
             </div>
           ) : (
             // <Link to="/historial">
-            <button class="button" onClick={repe}>
-              Traer su ingormacion de la Base de datos
-            </button>
+            <button class="button">Gracias</button>
             // </Link>
           )}{" "}
         </div>
