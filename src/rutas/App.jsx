@@ -19,14 +19,15 @@ function App() {
   const [cotiza, setcotiza] = useState(objetoCotizar);
 
   const items = JSON.parse(localStorage.getItem("items")) || [];
-
+  const longitudArray = items || 0;
+  const [longitudDato, setlongitudDato] = useState(longitudArray);
   const [guardadoCotizacion, setguardadoCotizacion] = useState(items);
-  const [longitudDato, setlongitudDato] = useState(0);
+  // const [proxdato, setproxdato] = useState(" datos actuales")
   useEffect(() => {
     setDatos(guardadoCotizacion);
     localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
+    setlongitudDato((set) => (set = guardadoCotizacion.length - 1));
   }, [guardadoCotizacion]);
-  ////////////////////////////////
 
   const [demora, setDemora] = useState(true);
 
@@ -48,12 +49,12 @@ function App() {
       console.log("esssssssssss2", guardadoCotizacion);
 
       setguardadoCotizacion((set) => [...set, cotiza]);
-      setlongitudDato((set) => (set = items.length));
       const [data9, error] = usegetDatos(items.length);
-      // const longitud = guardadoCotizacion;
+
       console.log("2longg:", longitudDato);
 
       setguardadoCotizacion((set) => [...set, ...data9]);
+
       console.log("esssssssssss3", guardadoCotizacion);
     } catch (error) {}
   };
@@ -61,7 +62,6 @@ function App() {
 
   function tomarData(e) {
     setcotiza((set) => ({ ...set, [e.target.name]: e.target.value }));
-    // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!", cotiza);
   }
 
   const sertifica = () => {
@@ -146,16 +146,8 @@ function App() {
     recargaDatos();
   };
 
-  // const limipiar = () => {
-  //   setcotiza(objetoCotizar);
-  // };
   return (
     <div className="App">
-      {/* <div>
-        <button onClick={repe}>changeee ep</button>
-        {data9.datos && data9.datos.map(char => <p> {char.propiedad}</p>)}
-      </div> */}
-
       {guardadoCotizacion.length > 0 && (
         <div className="historial">
           <span title="Ver Historial">
