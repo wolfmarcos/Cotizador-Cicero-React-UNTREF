@@ -1,5 +1,5 @@
 import Tabla from "../Tabla";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Historial = () => {
@@ -43,7 +43,7 @@ const Historial = () => {
           </Link>
           {/* <a  href="index.html"><button class="button button-outline">VOLVER</button></a> */}
         </div>
-        <Outlet></Outlet>
+     
       </div>
     </>
   );

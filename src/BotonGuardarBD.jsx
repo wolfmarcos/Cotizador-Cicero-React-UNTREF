@@ -1,57 +1,40 @@
 import { usegetDatos, setDatos } from "./hooks/firebase-config";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import { async } from "@firebase/util";
+import { Link } from "react-router-dom";
+
 function BotonGuardarBD({ cotiza, fbid }) {
   const [data9, error] = usegetDatos(fbid);
 
-  const [guardadoCotizacion, setguardadoCotizacion] = useState([]);
   const [longitudDato, setlongitudDato] = useState(0);
   const [demora, setDemora] = useState(true);
-  // const arru =[];
-  // const autenticador =  async() => {
-
-  //   return fbid
-  // };
-
-  // const local = JSON.parse(localStorage.getItem("items")) || [];
-
-  // const[enCarga,usuario]=actualUser;
- 
+  // const [guardadoCotizacion, setguardadoCotizacion] = useState([]);
 
   useEffect(() => {
-    setDemora(false)
+    setDemora(false);
     const df = async () => {
       const datoso = await data9;
-   
 
       if (datoso.length > 0) {
-        
         // setguardadoCotizacion( set=>set=datoso )
         // console.log("🚀 ~ file: setei :36 ~ df ~ setguardadoCotizacion", guardadoCotizacion)
         // localStorage.setItem("items", JSON.stringify("datoso"));
         localStorage.setItem("items", JSON.stringify(datoso));
-        setlongitudDato((set)=>set=datoso.length )
-        setDemora(true)
+        setlongitudDato((set) => (set = datoso.length));
+        setDemora(true);
       }
     };
     df();
   }, [fbid, data9]);
 
-  const posDescarga = async (guardado,local) => {
-  
-const lista =[...local, guardado]
+  const posDescarga = async (guardado, local) => {
     // setguardadoCotizacion((set) =>set=[...local, guardado]);
     // if (guardadoCotizacion.length >= 0 ) {
-      // const exito = await setDatos(guardadoCotizacion, fbid);
+    // const exito = await setDatos(guardadoCotizacion, fbid);
 
-
-    if (lista.length >= 0 ) {
-
-
-
+    const lista = [...local, guardado];
+    if (lista.length >= 0) {
       const exito = await setDatos(lista, fbid);
-      
 
       setDemora((set) => (set = exito));
       Swal.fire({
@@ -63,28 +46,29 @@ const lista =[...local, guardado]
       });
 
       localStorage.setItem("items", JSON.stringify(lista));
-  
+
       setlongitudDato((set) => (set = lista.length));
     }
   };
 
   const realizarGuardado = async () => {
- 
     setDemora((set) => (set = false));
- const local = JSON.parse(localStorage.getItem("items")) || [];
-    posDescarga(cotiza,local);
+    const local = JSON.parse(localStorage.getItem("items")) || [];
+    posDescarga(cotiza, local);
   };
 
   return (
     <>
       {demora ? (
         cotiza.costoM2 && !isNaN(cotiza.costoM2) ? (
-          <div onClick={realizarGuardado}>
-            <h1 button class="button guardado">
-              💾{" "}
-            </h1>
-            <label> "Guardar la ultima cotizacion" </label>
-          </div>
+          <Link to="/historial">
+            <div onClick={realizarGuardado}>
+              <h1 button class="button guardado">
+                💾{" "}
+              </h1>
+              <label> "Guardar la ultima cotizacion" </label>
+            </div>
+          </Link>
         ) : (
           " realize su cotizacion"
         )
@@ -96,29 +80,26 @@ const lista =[...local, guardado]
         />
       )}
 
-{demora ? (
-     longitudDato > 0 && (
-     <div className="historial">
-          <span title="Ver Historial">
-            {/* <Link to="/historial"> */}
-            📋
-            <div className="btn btn--1">{longitudDato}</div>
-            {/* </Link> */}
-          </span>
-        </div>)
-      )
-      : ( <div className="historial">
-
+      {demora ? (
+        longitudDato > 0 && (
+          <div className="historial">
+            <span title="Ver Historial">
+              {/* <Link to="/historial"> */}
+              📋
+              <div className="btn btn--1">{longitudDato}</div>
+              {/* </Link> */}
+            </span>
+          </div>
+        )
+      ) : (
+        <div className="historial">
           <img
             className="button button-outline"
             src="/DEMORA.gif"
             alt="page not found"
-            />
-            </div>
-        )}
-     
-
-
+          />
+        </div>
+      )}
 
       {/* {guardadoCotizacion &&
         guardadoCotizacion.map((char) => <p> {char.propiedad}</p>)}

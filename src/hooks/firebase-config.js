@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 
 import {
   onAuthStateChanged,
-  getRedirectResult,
+
   signOut,
   GoogleAuthProvider,
   getAuth,
@@ -10,16 +10,19 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+// getRedirectResult,
 
 import {
   getFirestore,
-  addDoc,
-  collection,
+
   doc,
   getDoc,
   setDoc,
-  getDocs,
+ 
 } from "firebase/firestore";
+// getDocs,
+// addDoc,
+// collection,
 
 import { useEffect, useState } from "react";
 
@@ -38,9 +41,7 @@ const db = getFirestore(app);
 export const auth = getAuth();
 const uids = null;
 
-// const datosDusuario = "no"
 
-// console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiin", datosDusuario);
 
 export const googleLogeo = async () => {
   const provider = new GoogleAuthProvider();
@@ -140,13 +141,7 @@ export const desLogGoogle = async () => {
     });
 };
 
-// const idUsuario=" "
-// const fff=(to)=>{
-//   idUsuario=to
-//   console.log("🚀 ~~~~~~~~~~~~~~~~~~~~~~~~~~~ file: firebase-config.js:55 ~ gle ~ uids", idUsuario)
-// }
 
-//terminar de resivir del local hacer la validacion si este o no  conectado hacer el cambio de linck terminar de ver el video
 
 export const correoLogeo = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)

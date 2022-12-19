@@ -5,7 +5,6 @@ import { googleLogeo, correoLogeo } from "./hooks/firebase-config";
 import { Await } from "react-router";
 
 // import { useHistory } from "react-router-dom";
-
 //  const history = useHistory();
 
 function Login2({ activa, setisUsername }) {

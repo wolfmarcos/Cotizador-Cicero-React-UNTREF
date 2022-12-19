@@ -3,18 +3,13 @@ import FormCotizador from "../FormCotizador2";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import { useAjax } from "../hooks/useAjax";
-import { Link } from "react-router-dom";
-import DataTime from "../hooks/Datatime";
+import dataTime from "../hooks/Datatime";
 import { actualUser } from "../hooks/firebase-config";
 import BotonGuardarBD from "../BotonGuardarBD";
 
 function App() {
-  ////////////
-
   const [enCarga, usuario, fbid] = actualUser();
   const [Logeo, setLogeo] = useState(null);
-
-  // const usuario=true
 
   useEffect(() => {
     setLogeo((set) => (set = usuario));
@@ -29,7 +24,7 @@ function App() {
     propiedad: null,
     ubicaciones: null,
     metros2: null,
-    fecha: DataTime(),
+    fecha: dataTime(),
   };
   const [cotiza, setcotiza] = useState(objetoCotizar);
 
@@ -41,27 +36,23 @@ function App() {
 
   const sertifica = () => {
     console.log(cotiza.propiedad);
-   if (
+    if (
       cotiza.propiedad == "" ||
       cotiza.propiedad == null ||
       isNaN(cotiza.propiedad)
     ) {
       Swal.fire({ title: "No ingreso tipo de propiedad", icon: "warning" });
       return false;
-    }
-
-    else if (
-     
-      cotiza.ubicaciones ==" "||
-      cotiza.ubicaciones == null||
+    } else if (
+      cotiza.ubicaciones == " " ||
+      cotiza.ubicaciones == null ||
       isNaN(cotiza.ubicaciones)
-    ) { console.log( cotiza.ubicaciones, typeof cotiza.ubicaciones ); 
+    ) {
+      console.log(cotiza.ubicaciones, typeof cotiza.ubicaciones);
       Swal.fire({ title: "no ingreso la ubicaciones", icon: "warning" });
       return false;
-    }
-
-    else if (
-      cotiza.metros2 == " "||
+    } else if (
+      cotiza.metros2 == " " ||
       cotiza.metros2 == null ||
       isNaN(cotiza.metros2)
     ) {
@@ -70,11 +61,9 @@ function App() {
         icon: "warning",
       });
       return false;
-    }else{
-
+    } else {
       return true;
     }
-
   };
   const deslogeado = () => alert("se deve Logear");
 
@@ -101,7 +90,7 @@ function App() {
 
   const funcionCotizar = (e) => {
     e.preventDefault();
-    const datosCompletados=sertifica()
+    const datosCompletados = sertifica();
     console.log(datosCompletados);
     if (datosCompletados) {
       // setDemora((set) => (set = false));
@@ -145,26 +134,21 @@ function App() {
 
         <div className="center separador">
           <p className="importe">
-            Precio estimado: ${" "}
+            Precio estimado: $
             <span id="valorPoliza">{cotiza.costoM2 || "00.0"}</span>
           </p>
-          {/* (typeof usuario)!="String" */}
           {Logeo == null ? (
             <div onClick={deslogeado}>
               <h1 button class="button guardado">
-                💾{" "}
+                💾
               </h1>
               <label>
-                {" "}
-                "Para guardatodas sus cotizacionse deve estar registrado"{" "}
+                "Para guardatodas sus cotizacionse, debe estar registrado"
               </label>
             </div>
           ) : (
-            // <Link to="/historial">
-            // "  nada"
             <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
-            // </Link>
-          )}{" "}
+          )}
         </div>
       </div>
     </div>
