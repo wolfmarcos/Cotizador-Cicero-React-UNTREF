@@ -4,11 +4,14 @@ import { useState, useReft } from "react";
 import Login2 from "./Login2";
 import {  desLogoGoogle } from "./hooks/firebase-config";
 
-const desLogo = () => {
-  desLogoGoogle();
-};
 
 function Nav() {
+  const desLogo = () => {
+    localStorage.clear();
+    
+    // storage.removeItem('items');
+    desLogoGoogle();
+  };
   const [activa, setactiva] = useState(false);
   const activar = () => {
     setactiva(!activa);

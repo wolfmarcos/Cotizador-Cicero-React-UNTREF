@@ -33,10 +33,13 @@ function Login2({ activa }) {
       setususrio((set) => ({ ...set, email, password, id }));
       Swal.fire({ title: "Logeado", icon: 'success' });
       
+      localStorage.clear();
       activa();
       logeo(email, password)
     }
   };
+
+  
 
   return (
     <>

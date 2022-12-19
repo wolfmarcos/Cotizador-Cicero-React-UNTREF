@@ -8,7 +8,7 @@ import {
   getAuth,
   signInWithPopup,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 import {
@@ -18,7 +18,7 @@ import {
   doc,
   getDoc,
   setDoc,
-  getDocs
+  getDocs,
 } from "firebase/firestore";
 
 import { useEffect, useState } from "react";
@@ -30,40 +30,45 @@ const firebaseConfig = {
   storageBucket: "cotizador-616a3.appspot.com",
   messagingSenderId: "657272668279",
   appId: "1:657272668279:web:cc6f0fa016682995d00672",
-  measurementId: "G-FDG9SJ15XN"
+  measurementId: "G-FDG9SJ15XN",
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 export const auth = getAuth();
 
-
 export const actualUser = async () => {
   const [enCarga, setenCarga] = useState(3);
   const [fbid, setfbid] = useState(false);
   const [usuario, setusuario] = useState(false);
 
-  onAuthStateChanged(auth, user => {
+  onAuthStateChanged(auth, (user) => {
     if (user) {
       setenCarga(1);
-      setusuario(set => (set = user.displayName));
-      setfbid(set => (set = user.uid));
+      setusuario((set) => (set = user.displayName));
+      setfbid((set) => (set = user.uid));
     } else {
       setenCarga(2);
     }
   });
+  
 
   return [enCarga, usuario, fbid];
 };
 
-export const setDatos = async datos => {
+export const setDatos = async (datos) => {
+  console.log(datos, "datos");
   try {
-    const User = await getAuth().currentUser.uid;
+    const User = await auth.currentUser.uid;
     if (User) {
-      setDoc(doc(db, "Cotiza", User), {
-        datos
-      });
+      await setDoc(
+        doc(db, "Cotiza", User),
+        await {
+          datos,
+        }
+      );
     } else {
+      console.log("no esta el user");
     }
   } catch (error) {}
 };
@@ -72,46 +77,69 @@ export const usegetDatos = (longitud) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   // const [user, setUser] = useState("p");
+  console.log("entro al efecto 0", longitud);
 
-  const getDatos = async () => {
-    
+  // const d = []
+  // setTimeout(() => {
+  // }, 1000);
+  // const d = auth.currentUser.uid;
+  const getDatos = async (d) => {
+    console.log("entro al efecto 2 f", longitud);
 
+    console.log(auth, "entro al efecto 3!!!!!!!!!!!!!!!!!!!!! user", longitud);
+    //  console.log(     d,
+    //    "entro al efecto 3!!!!!!!!!!!!!!!!!!!!! user.currentUser",
+    //    longitud
+    //   );
     try {
-      const User = await getAuth().currentUser.uid;
-      
+      const User = auth.currentUser.uid;
+      console.log(User, "entro al efecto 4 user", longitud);
 
       const docRef = doc(db, "Cotiza", User);
 
       const docSnap = await getDoc(docRef);
-
-      let lista = [];
-      console.log(lista);
+      console.log(User, "entro al efecto 4 user", docSnap.data().datos);
+      console.log(
+        docSnap.exists(),
+        "entro al efecto 4 user",
+        docSnap.data().datos
+      );
+      // let lista = [];
+      // console.log(lista);
       if (docSnap.exists()) {
-        lista.push(docSnap.data());
-        console.log("lista", docSnap.data());
+        // lista.push(docSnap.data());
+        console.log(
+          docSnap.exists(),
+          "entro al efecto 4 user",
+          docSnap.data().datos
+        );
+        setData(docSnap.data().datos);
+        console.log("lista", "docSnap.data()");
       } else {
         console.log("No such document!");
       }
-
-      setData(lista[0]);
     } catch (error) {
       setError(true);
+      console.log("!eeeeeeeeerror", error);
     }
   };
 
   useEffect(() => {
-    getDatos();
+    setTimeout(() => {
+      console.log("entro al efecto 1", longitud);
+      getDatos();
+    }, 1500);
   }, [longitud]);
+
   return [data, error];
 };
 
 export const desLogoGoogle = async () => {
-  const auth = getAuth();
   signOut(auth)
     .then(() => {
       // Sign-out successful.
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 };
@@ -119,7 +147,7 @@ export const desLogoGoogle = async () => {
 export const gle = async () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
-    .then(result => {
+    .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
@@ -130,7 +158,7 @@ export const gle = async () => {
 
       // ...
     })
-    .catch(error => {
+    .catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -144,23 +172,23 @@ export const gle = async () => {
 
 export const logeo = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
+    .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
       // ...
     })
-    .catch(error => {
+    .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       // ..
     });
   signInWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
+    .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
       // ...
     })
-    .catch(error => {
+    .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
     });
@@ -287,8 +315,6 @@ export const logeo = (email, password) => {
 // }
 
 // dd()
-
-
 
 ///////////////
 

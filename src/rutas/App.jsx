@@ -7,7 +7,20 @@ import { Link } from "react-router-dom";
 import DataTime from "../hooks/Datatime";
 import { usegetDatos, setDatos } from "../hooks/firebase-config";
 
+
+
+
+
+//         docSnap.data().datos.forEach(element => {
+// docs.push()
+          
+//         });
+
+
+
 function App() {
+  const [longitudDato, setlongitudDato] = useState(1);
+  const [data9, error] = usegetDatos(longitudDato);
   ////////////
   const objetoCotizar = {
     costoM2: "",
@@ -17,17 +30,83 @@ function App() {
     fecha: DataTime(),
   };
   const [cotiza, setcotiza] = useState(objetoCotizar);
+  const [inicial, setinicial] = useState([])
 
-  const items = JSON.parse(localStorage.getItem("items")) || [];
-  const longitudArray = items || 0;
-  const [longitudDato, setlongitudDato] = useState(longitudArray);
-  const [guardadoCotizacion, setguardadoCotizacion] = useState(items);
-  // const [proxdato, setproxdato] = useState(" datos actuales")
-  useEffect(() => {
-    setDatos(guardadoCotizacion);
-    localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
-    setlongitudDato((set) => (set = guardadoCotizacion.length - 1));
-  }, [guardadoCotizacion]);
+  console.log(longitudDato,"🚀 ~ file: App.jsx:23 ~ App ~ data9", data9)
+// const data8= [...data9]
+  const local = JSON.parse(localStorage.getItem("items")) || [];
+  console.log(data9.length >0,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",data9);
+
+ 
+ 
+  if (data9.length > 0 ) {
+    console.log("22222!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+    try {
+      console.log("tendria que tomar lo de la bd");
+      // local = [...local, ...data9];
+      setinicial([...local, ...data9])
+      console.log("22222!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",inicial);
+    } catch (error) { }
+  }
+  
+
+  
+  ////
+  const [guardadoCotizacion, setguardadoCotizacion] = useState(inicial);
+  ////
+ 
+ 
+ 
+ 
+  //  setguardadoCotizacion((set)=>set = data9);
+  // tendria que analizar el tiempo que toma el producto y el tiempo de respuesta al localo la  aplicacion carga toma parametro por defecto en nullo y catga el local
+  // let [n, setn] = useState(1)
+  // let i=1
+
+  // const inicial=[]
+  // if (data9==[] || data9==" ") {inicial=local
+  //   console.log("data9==[]")
+
+  // }else if(local==[] || local==" "){inicial=data9
+  //       console.log("local==[]")
+  // }
+  // console.log(inicial);
+
+useEffect(() => {
+  setlongitudDato(set=>set+1)
+  localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
+}, [])
+
+
+  const guardasBD = async (guarda) => {
+    
+    try {
+      console.log(guardadoCotizacion, "=3=", typeof guardadoCotizacion);
+      console.log(guarda, "=33=", typeof guarda);
+      setDatos(await guarda);
+    } catch (error) { }
+  };
+
+  // localStorage.setItem("items", JSON.stringify([...data9,...guardadoCotizacion]));
+  //   useEffect(() => {
+
+  //   // console.log("setguardadoCotizacionsetguardadoCotizacionsetguardadoCotizacionsetguardadoCotizacion",guardadoCotizacion);
+
+  // //   setguardadoCotizacion((set)=>set = data9);
+  // // try {
+  // // const datosPerdidos=[...local,...guardadoCotizacion]
+
+  console.log("las suma de los datros que se pieden", [...data9]);
+  //  localStorage.setItem("items", JSON.stringify([...data9,...guardadoCotizacion]));
+  // // } catch (error) {
+
+  // // }
+  // //   console.log("cargandodododododododododododododododododododododododododododododododododododo");
+  // //   // setguardadoCotizacion((set) => [...set, ...data9]);
+  // //   localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
+  // //   // setlongitudDato((set) => (set = guardadoCotizacion.length));
+  //   }, [guardadoCotizacion]);
 
   const [demora, setDemora] = useState(true);
 
@@ -35,29 +114,73 @@ function App() {
 
   const [data, isLoading] = useAjax(url2);
 
-  console.log("1longg:", longitudDato);
-  console.log("local", items.length);
   const realizarGuardado = () => {
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Cotizacion guardada exitosamente",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    try {
-      console.log("esssssssssss2", guardadoCotizacion);
+    console.log("111111:", cotiza, " = cotiza 1 guarda = ", typeof cotiza);
+    console.log(
+      "111111:",
+      cotiza,
+      " = cotiza 1.2 guarda = ",
+      guardadoCotizacion
+    );
 
-      setguardadoCotizacion((set) => [...set, cotiza]);
-      const [data9, error] = usegetDatos(items.length);
+    setguardadoCotizacion((set) => [...set, cotiza]);
+    // console.log("conchaaaaaaaaaaaaaa");
+    const datoto = [{a:"a"},{b:"b"}]
 
-      console.log("2longg:", longitudDato);
+    console.log(datoto,"esese", typeof datoto );
+    console.log(guardadoCotizacion, "2", typeof guardadoCotizacion);
 
-      setguardadoCotizacion((set) => [...set, ...data9]);
+    if (guardadoCotizacion != null || guardadoCotizacion !=" ") {
+      // alert(guardadoCotizacion)
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Cotizacion guardada exitosamente",
+        showConfirmButton: false,
+        timer: 1500,
+      });
 
-      console.log("esssssssssss3", guardadoCotizacion);
-    } catch (error) {}
+      guardasBD(guardadoCotizacion);
+    }
+    // const [data9, error] = usegetDatos();
+    // console.log(guardadoCotizacion, data9);
+    // setDatos(guardadoCotizacion);
+    // setguardadoCotizacion((set) => [...set, ...data9]);
+    // setDatos(guardadoCotizacion);
+
+    // useEffect(() => {
+    //     const ff=()=>{try {
+    //       setn(set=>set+1)
+    // console.log(n,"cargandodododododododododododododododododododododododododododododododododododo",i=i+i);
+    // console.log(data9,"cargandodododododododododododododododododododododododododododododododododododo",i=i+i);
+    //      ;
+    // setDatos(guardadoCotizacion);
+    //       // setguardadoCotizacion((set) => [...set, ...data9.datos]);
+    //       // console.log(guardadoCotizacion);
+    //     } catch (error) {      }
+    //   }
+    //   ff()
+    // }, [guardadoCotizacion])
+
+    // console.log("2longg:", longitudDato);
+    // console.log("esssssssssss2", guardadoCotizacion);
+
+    // try {
+    // setguardadoCotizacion((set) => [...set, ...data9]);
+    // useEffect(() => {
+    // setDatos(guardadoCotizacion);
+
+    // localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
+    // setlongitudDato((set) => (set = guardadoCotizacion.length ));
+    // setDatos(guardadoCotizacion);
+    // }, [guardadoCotizacion]);
+
+    // } catch (error) {}
+
+    // console.log("esssssssssss3", guardadoCotizacion);
   };
+  
+
   if (isLoading) return <h3>Loading...</h3>;
 
   function tomarData(e) {
@@ -158,9 +281,14 @@ function App() {
           </span>
         </div>
       )}
+      <h1> sin descarga de gitH</h1>
+      {guardadoCotizacion &&
+        guardadoCotizacion.map((char) => <p> {char.propiedad}</p>)}
       <h1 o className="center separador">
         Seguros del hogar 🏡
       </h1>
+
+      {data9 && data9.map((char) => <p> {char.propiedad}</p>)}
 
       <div className=" center div-cotizador">
         <FormCotizador
