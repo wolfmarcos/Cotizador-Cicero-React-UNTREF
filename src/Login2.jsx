@@ -1,23 +1,31 @@
 import "./cssForm.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import {  gle ,logeo} from "./hooks/firebase-config";
+import { googleLogeo, correoLogeo } from "./hooks/firebase-config";
+import { Await } from "react-router";
 
-function Login2({ activa }) {
+// import { useHistory } from "react-router-dom";
+
+//  const history = useHistory();
+
+function Login2({ activa, setisUsername }) {
   const [ususrio, setususrio] = useState({ email: "", password: "", id: "" });
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [Usuario, setUsuario] = useState(null);
 
   const sertifica = () => {
-    console.log(ususrio);
 
-    
-    if ((!/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(email))) {
+    if (
+      !/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(email)
+    ) {
       Swal.fire({ title: "Email invalido", icon: "warning" });
       return false;
     }
 
-        if ((!/(?=(.*[0-9]))(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{4,20}/.test(password))) {
+    if (
+      !/(?=(.*[0-9]))(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{4,20}/.test(password)
+    ) {
       Swal.fire({ title: "Contraseña invalida", icon: "warning" });
       return false;
     }
@@ -25,21 +33,27 @@ function Login2({ activa }) {
     return true;
   };
 
-  const login = (e) => {
+  const porFormulario = (e) => {
     e.preventDefault();
 
     if (sertifica()) {
       const id = 1;
       setususrio((set) => ({ ...set, email, password, id }));
-      Swal.fire({ title: "Logeado", icon: 'success' });
-      
-      localStorage.clear();
+      Swal.fire({ title: "Logeado", icon: "success" });
+
       activa();
-      logeo(email, password)
+      localStorage.clear();
+      correoLogeo(email, password);
     }
   };
 
-  
+  const gooogleLog = async () => {
+    // const datosUsuario= await
+    const logeo = await googleLogeo();
+    sessionStorage.setItem("usuario", JSON.stringify(logeo));
+    setisUsername((set) => !set);
+
+  };
 
   return (
     <>
@@ -53,13 +67,13 @@ function Login2({ activa }) {
           <p>x</p>
         </button>
         <label onClick={activa}>
-          <h1 className="login">logear </h1>
-          <h1 className="login btn btn--2" onClick={gle}>
-            Google{" "}
-          </h1>
+          <h4 className="login">Puede iniciar con </h4>
+          <h3 className="login btn btn--2" onClick={gooogleLog}>
+            Google
+          </h3>
         </label>
-
-        <form onSubmit={login}>
+        <h4 className="login">Logear/registro </h4>
+        <form onSubmit={porFormulario}>
           <div>
             <h2>
               <label for="lN">email :</label>

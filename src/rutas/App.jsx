@@ -5,181 +5,33 @@ import { useState, useEffect } from "react";
 import { useAjax } from "../hooks/useAjax";
 import { Link } from "react-router-dom";
 import DataTime from "../hooks/Datatime";
-import { usegetDatos, setDatos } from "../hooks/firebase-config";
-
-
-
-
-
-//         docSnap.data().datos.forEach(element => {
-// docs.push()
-          
-//         });
-
-
+import { actualUser } from "../hooks/firebase-config";
+import BotonGuardarBD from "../BotonGuardarBD";
 
 function App() {
-  const [longitudDato, setlongitudDato] = useState(1);
-  const [data9, error] = usegetDatos(longitudDato);
   ////////////
-  const objetoCotizar = {
-    costoM2: "",
-    propiedad: "",
-    ubicaciones: "",
-    metros2: "",
-    fecha: DataTime(),
-  };
-  const [cotiza, setcotiza] = useState(objetoCotizar);
-  const [inicial, setinicial] = useState([])
 
-  console.log(longitudDato,"🚀 ~ file: App.jsx:23 ~ App ~ data9", data9)
-// const data8= [...data9]
-  const local = JSON.parse(localStorage.getItem("items")) || [];
-  console.log(data9.length >0,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",data9);
+  const [enCarga, usuario, fbid] = actualUser();
+  const [Logeo, setLogeo] = useState(null);
 
- 
- 
-  if (data9.length > 0 ) {
-    console.log("22222!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  // const usuario=true
 
-    try {
-      console.log("tendria que tomar lo de la bd");
-      // local = [...local, ...data9];
-      setinicial([...local, ...data9])
-      console.log("22222!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",inicial);
-    } catch (error) { }
-  }
-  
-
-  
-  ////
-  const [guardadoCotizacion, setguardadoCotizacion] = useState(inicial);
-  ////
- 
- 
- 
- 
-  //  setguardadoCotizacion((set)=>set = data9);
-  // tendria que analizar el tiempo que toma el producto y el tiempo de respuesta al localo la  aplicacion carga toma parametro por defecto en nullo y catga el local
-  // let [n, setn] = useState(1)
-  // let i=1
-
-  // const inicial=[]
-  // if (data9==[] || data9==" ") {inicial=local
-  //   console.log("data9==[]")
-
-  // }else if(local==[] || local==" "){inicial=data9
-  //       console.log("local==[]")
-  // }
-  // console.log(inicial);
-
-useEffect(() => {
-  setlongitudDato(set=>set+1)
-  localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
-}, [])
-
-
-  const guardasBD = async (guarda) => {
-    
-    try {
-      console.log(guardadoCotizacion, "=3=", typeof guardadoCotizacion);
-      console.log(guarda, "=33=", typeof guarda);
-      setDatos(await guarda);
-    } catch (error) { }
-  };
-
-  // localStorage.setItem("items", JSON.stringify([...data9,...guardadoCotizacion]));
-  //   useEffect(() => {
-
-  //   // console.log("setguardadoCotizacionsetguardadoCotizacionsetguardadoCotizacionsetguardadoCotizacion",guardadoCotizacion);
-
-  // //   setguardadoCotizacion((set)=>set = data9);
-  // // try {
-  // // const datosPerdidos=[...local,...guardadoCotizacion]
-
-  console.log("las suma de los datros que se pieden", [...data9]);
-  //  localStorage.setItem("items", JSON.stringify([...data9,...guardadoCotizacion]));
-  // // } catch (error) {
-
-  // // }
-  // //   console.log("cargandodododododododododododododododododododododododododododododododododododo");
-  // //   // setguardadoCotizacion((set) => [...set, ...data9]);
-  // //   localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
-  // //   // setlongitudDato((set) => (set = guardadoCotizacion.length));
-  //   }, [guardadoCotizacion]);
-
-  const [demora, setDemora] = useState(true);
+  useEffect(() => {
+    setLogeo((set) => (set = usuario));
+  }, [usuario]);
 
   const url2 = "https://api.npoint.io/2c789c463f2951308811";
 
   const [data, isLoading] = useAjax(url2);
 
-  const realizarGuardado = () => {
-    console.log("111111:", cotiza, " = cotiza 1 guarda = ", typeof cotiza);
-    console.log(
-      "111111:",
-      cotiza,
-      " = cotiza 1.2 guarda = ",
-      guardadoCotizacion
-    );
-
-    setguardadoCotizacion((set) => [...set, cotiza]);
-    // console.log("conchaaaaaaaaaaaaaa");
-    const datoto = [{a:"a"},{b:"b"}]
-
-    console.log(datoto,"esese", typeof datoto );
-    console.log(guardadoCotizacion, "2", typeof guardadoCotizacion);
-
-    if (guardadoCotizacion != null || guardadoCotizacion !=" ") {
-      // alert(guardadoCotizacion)
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Cotizacion guardada exitosamente",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-
-      guardasBD(guardadoCotizacion);
-    }
-    // const [data9, error] = usegetDatos();
-    // console.log(guardadoCotizacion, data9);
-    // setDatos(guardadoCotizacion);
-    // setguardadoCotizacion((set) => [...set, ...data9]);
-    // setDatos(guardadoCotizacion);
-
-    // useEffect(() => {
-    //     const ff=()=>{try {
-    //       setn(set=>set+1)
-    // console.log(n,"cargandodododododododododododododododododododododododododododododododododododo",i=i+i);
-    // console.log(data9,"cargandodododododododododododododododododododododododododododododododododododo",i=i+i);
-    //      ;
-    // setDatos(guardadoCotizacion);
-    //       // setguardadoCotizacion((set) => [...set, ...data9.datos]);
-    //       // console.log(guardadoCotizacion);
-    //     } catch (error) {      }
-    //   }
-    //   ff()
-    // }, [guardadoCotizacion])
-
-    // console.log("2longg:", longitudDato);
-    // console.log("esssssssssss2", guardadoCotizacion);
-
-    // try {
-    // setguardadoCotizacion((set) => [...set, ...data9]);
-    // useEffect(() => {
-    // setDatos(guardadoCotizacion);
-
-    // localStorage.setItem("items", JSON.stringify(guardadoCotizacion));
-    // setlongitudDato((set) => (set = guardadoCotizacion.length ));
-    // setDatos(guardadoCotizacion);
-    // }, [guardadoCotizacion]);
-
-    // } catch (error) {}
-
-    // console.log("esssssssssss3", guardadoCotizacion);
+  const objetoCotizar = {
+    costoM2: null,
+    propiedad: null,
+    ubicaciones: null,
+    metros2: null,
+    fecha: DataTime(),
   };
-  
+  const [cotiza, setcotiza] = useState(objetoCotizar);
 
   if (isLoading) return <h3>Loading...</h3>;
 
@@ -189,7 +41,7 @@ useEffect(() => {
 
   const sertifica = () => {
     console.log(cotiza.propiedad);
-    if (
+   if (
       cotiza.propiedad == "" ||
       cotiza.propiedad == null ||
       isNaN(cotiza.propiedad)
@@ -198,17 +50,18 @@ useEffect(() => {
       return false;
     }
 
-    if (
-      cotiza.ubicaciones == "" ||
-      cotiza.ubicaciones == null ||
+    else if (
+     
+      cotiza.ubicaciones ==" "||
+      cotiza.ubicaciones == null||
       isNaN(cotiza.ubicaciones)
-    ) {
+    ) { console.log( cotiza.ubicaciones, typeof cotiza.ubicaciones ); 
       Swal.fire({ title: "no ingreso la ubicaciones", icon: "warning" });
       return false;
     }
 
-    if (
-      cotiza.metros2 == "" ||
+    else if (
+      cotiza.metros2 == " "||
       cotiza.metros2 == null ||
       isNaN(cotiza.metros2)
     ) {
@@ -217,10 +70,13 @@ useEffect(() => {
         icon: "warning",
       });
       return false;
+    }else{
+
+      return true;
     }
 
-    return true;
   };
+  const deslogeado = () => alert("se deve Logear");
 
   const recargaDatos = () => {
     let propiedad = data.propiedades.filter((props) => {
@@ -228,7 +84,7 @@ useEffect(() => {
         return props;
       }
     });
-    console.log(propiedad[0].tipo);
+
     let ubicaciones = data.ubicaciones.filter((props) => {
       if (props.factor == cotiza.ubicaciones) {
         return props;
@@ -245,19 +101,21 @@ useEffect(() => {
 
   const funcionCotizar = (e) => {
     e.preventDefault();
-    if (sertifica()) {
-      setDemora((set) => (set = false));
-      setTimeout(() => {
-        setDemora((set) => (set = true));
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Cotización realizada con éxito.",
-          showConfirmButton: false,
-          timer: 1000,
-        });
-      }, 1000);
+    const datosCompletados=sertifica()
+    console.log(datosCompletados);
+    if (datosCompletados) {
+      // setDemora((set) => (set = false));
+      // setTimeout(() => {
+      //   setDemora((set) => (set = true));
+      // }, 1000);
 
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Cotización realizada con éxito.",
+        showConfirmButton: false,
+        timer: 1000,
+      });
       const resultado = (
         +data.costoM2 *
         +cotiza.propiedad *
@@ -265,37 +123,23 @@ useEffect(() => {
         +cotiza.metros2
       ).toFixed(2);
       setcotiza((set) => ({ ...set, costoM2: resultado }));
+      recargaDatos();
     }
-    recargaDatos();
   };
+  // console.log("🚀 ~ file: App.jsx:152 ~ App ~ sdfsdfsdf",typeof ( typeof usuario))
 
   return (
     <div className="App">
-      {guardadoCotizacion.length > 0 && (
-        <div className="historial">
-          <span title="Ver Historial">
-            <Link to="/historial">
-              📋
-              <div className="btn btn--1">{longitudDato}</div>
-            </Link>
-          </span>
-        </div>
-      )}
-      <h1> sin descarga de gitH</h1>
-      {guardadoCotizacion &&
-        guardadoCotizacion.map((char) => <p> {char.propiedad}</p>)}
       <h1 o className="center separador">
         Seguros del hogar 🏡
       </h1>
-
-      {data9 && data9.map((char) => <p> {char.propiedad}</p>)}
 
       <div className=" center div-cotizador">
         <FormCotizador
           tomarData={tomarData}
           data={data}
           funcionCotizar={funcionCotizar}
-          demora={demora}
+          // demora={demora}
           cotiza={cotiza}
         />
 
@@ -304,16 +148,21 @@ useEffect(() => {
             Precio estimado: ${" "}
             <span id="valorPoliza">{cotiza.costoM2 || "00.0"}</span>
           </p>
-          {cotiza.costoM2 && !isNaN(cotiza.costoM2) ? (
-            <div onClick={realizarGuardado}>
+          {/* (typeof usuario)!="String" */}
+          {Logeo == null ? (
+            <div onClick={deslogeado}>
               <h1 button class="button guardado">
                 💾{" "}
               </h1>
-              <label> "Guardar la ultima cotizacion" </label>
+              <label>
+                {" "}
+                "Para guardatodas sus cotizacionse deve estar registrado"{" "}
+              </label>
             </div>
           ) : (
             // <Link to="/historial">
-            <button class="button">Gracias</button>
+            // "  nada"
+            <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
             // </Link>
           )}{" "}
         </div>

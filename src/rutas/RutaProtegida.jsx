@@ -7,16 +7,14 @@ import ErrorPage from "./ErrorPage";
 
 function RutaProtegida() {
   const [isAuth, setisAuth] = useState(3);
-  const [usuarios, setusuarios] = useState(3);
 
-  // useEffect(() => {
-      const autenticador = async () => {
-      
-      const [enCarga, usuario] = await actualUser();
-      setusuarios(set=>(set=usuario))
+  const autenticador =  async() => {
+    
+    const [enCarga, usuario] =  await actualUser();
+     
       setisAuth(set => (set = enCarga));
     };
-    // }, [])
+   
     
 
 
@@ -24,7 +22,7 @@ function RutaProtegida() {
 
   if (isAuth == 1) {
  
-   
+  //  alert("entro en 1",isAuth) 
     // let timerInterval
     // Swal.fire({
     //   title: 'Gracias '+usuarios +" pongame un 10",
@@ -49,19 +47,19 @@ function RutaProtegida() {
     // }).then((result) => {
     //   /* Read more about handling dismissals below */
     //   if (result.dismiss === Swal.DismissReason.timer) {
-    //     console.log('I was closed by the timer')
+    //  
     //   }
     // })
    
-   
-    
-   
+
+  
    
     return <Outlet />;
 
 
 
   } else if (isAuth == 2) {
+      // alert("entro en 2",isAuth) 
     Swal.fire({
       title: "Denegado!",
       text: "Realise su login",

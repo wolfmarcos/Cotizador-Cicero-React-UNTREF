@@ -36,127 +36,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 export const auth = getAuth();
+const uids = null;
 
-export const actualUser = async () => {
-  const [enCarga, setenCarga] = useState(3);
-  const [fbid, setfbid] = useState(false);
-  const [usuario, setusuario] = useState(false);
+// const datosDusuario = "no"
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setenCarga(1);
-      setusuario((set) => (set = user.displayName));
-      setfbid((set) => (set = user.uid));
-    } else {
-      setenCarga(2);
-    }
-  });
-  
+// console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiin", datosDusuario);
 
-  return [enCarga, usuario, fbid];
-};
-
-export const setDatos = async (datos) => {
-  console.log(datos, "datos");
-  try {
-    const User = await auth.currentUser.uid;
-    if (User) {
-      await setDoc(
-        doc(db, "Cotiza", User),
-        await {
-          datos,
-        }
-      );
-    } else {
-      console.log("no esta el user");
-    }
-  } catch (error) {}
-};
-
-export const usegetDatos = (longitud) => {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(false);
-  // const [user, setUser] = useState("p");
-  console.log("entro al efecto 0", longitud);
-
-  // const d = []
-  // setTimeout(() => {
-  // }, 1000);
-  // const d = auth.currentUser.uid;
-  const getDatos = async (d) => {
-    console.log("entro al efecto 2 f", longitud);
-
-    console.log(auth, "entro al efecto 3!!!!!!!!!!!!!!!!!!!!! user", longitud);
-    //  console.log(     d,
-    //    "entro al efecto 3!!!!!!!!!!!!!!!!!!!!! user.currentUser",
-    //    longitud
-    //   );
-    try {
-      const User = auth.currentUser.uid;
-      console.log(User, "entro al efecto 4 user", longitud);
-
-      const docRef = doc(db, "Cotiza", User);
-
-      const docSnap = await getDoc(docRef);
-      console.log(User, "entro al efecto 4 user", docSnap.data().datos);
-      console.log(
-        docSnap.exists(),
-        "entro al efecto 4 user",
-        docSnap.data().datos
-      );
-      // let lista = [];
-      // console.log(lista);
-      if (docSnap.exists()) {
-        // lista.push(docSnap.data());
-        console.log(
-          docSnap.exists(),
-          "entro al efecto 4 user",
-          docSnap.data().datos
-        );
-        setData(docSnap.data().datos);
-        console.log("lista", "docSnap.data()");
-      } else {
-        console.log("No such document!");
-      }
-    } catch (error) {
-      setError(true);
-      console.log("!eeeeeeeeerror", error);
-    }
-  };
-
-  useEffect(() => {
-    setTimeout(() => {
-      console.log("entro al efecto 1", longitud);
-      getDatos();
-    }, 1500);
-  }, [longitud]);
-
-  return [data, error];
-};
-
-export const desLogoGoogle = async () => {
-  signOut(auth)
-    .then(() => {
-      // Sign-out successful.
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
-export const gle = async () => {
+export const googleLogeo = async () => {
   const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
+
+  return signInWithPopup(auth, provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
-      console.log(token);
-      // The signed-in user info.
-      const user = result.user;
-      console.log(user.uid);
-
+      const users = result.user;
+      console.log(users);
+      console.log(
+        "🚀 ~ file: firebase-config.js:165 ~ .then ~ users",
+        users.displayName
+      );
       // ...
+      return  {nombre :users.displayName ,email:users.email, token :credential.accessToken};
     })
     .catch((error) => {
       // Handle Errors here.
@@ -166,11 +66,89 @@ export const gle = async () => {
       const email = error.customData.email;
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
     });
 };
 
-export const logeo = (email, password) => {
+export const actualUser = () => {
+  const [enCarga, setenCarga] = useState(3);
+  const [fbid, setfbid] = useState(null);
+  const [usuario, setusuario] = useState(null);
+  useEffect(() => {
+    const fff = async () => {
+      console.log("actualUser");
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setenCarga(1);
+          setusuario((set) => (set = user.displayName));
+          setfbid((set) => (set = user.uid));
+        } else {
+          setenCarga(2);
+        }
+      });
+    };
+
+    fff();
+  }, []);
+
+  return [enCarga, usuario, fbid];
+};
+
+export const setDatos = async (datos, usid) => {
+
+  try {
+    if (usid) {
+     await  setDoc(doc(db, "Cotiza", usid), {     datos     });
+       return true } else {   }
+  } catch (error) {}
+  
+  return 
+};
+
+export const usegetDatos = (fbid1=null) => {
+
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(false);
+
+  const getDatos = async () => {
+    try {
+      const docRef = doc(db, "Cotiza", fbid1);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setData(async(set)=>  set= await docSnap.data().datos);
+        console.log("lista", "docSnap.data()", docSnap.data().datos);
+      } else {
+        console.log("No such document!");
+      }
+    } catch (error) {
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
+    getDatos();
+  }, [fbid1]);
+  return [data, error];
+};
+
+export const desLogGoogle = async () => {
+  const auth = getAuth();
+ return signOut(auth)
+    .then((desLog) =>   desLog)
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// const idUsuario=" "
+// const fff=(to)=>{
+//   idUsuario=to
+//   console.log("🚀 ~~~~~~~~~~~~~~~~~~~~~~~~~~~ file: firebase-config.js:55 ~ gle ~ uids", idUsuario)
+// }
+
+//terminar de resivir del local hacer la validacion si este o no  conectado hacer el cambio de linck terminar de ver el video
+
+export const correoLogeo = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
@@ -197,138 +175,3 @@ export const logeo = (email, password) => {
     // ...
   });
 };
-
-//  const [ids, setids] = useState(second)
-//   useEffect(() => {
-//     [enCarga, usuario,fbid]=   actualUser()
-//     // console.log("iiiiiiiiiiiiiiiiiiiiidddddddddddd",fbid);
-//     setids((set)=>set=fbid)
-
-//   }, [datos])
-
-// userr= await auth.currentUser
-// console.log(userr);
-// userr=undefined?null:userr.id
-// console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",userr);6qJK25xnFuMsUDAouVR9wjU1uYc2
-// const datoo = onAuthStateChanged(auth, user => {
-//   if (user) {        return user;
-//   } else {
-
-//     return "noooooooooooo";
-//   }})
-
-// setUser((set)=>set = user.uid)
-// /* return datos  */
-// console.log("useruser",user);
-// console.log("useeseses;",datos);
-//////////////////////////////////////////////////
-
-// export const getDatos = async d => {
-//   console.log("entroooooooooooooooooooooooooo", d);
-
-//   const [usuario4, setusuario4] = useState(5);
-//   // const [tomarDatos, setTomandoDatos] = useState(0);
-//   // useEffect(() => {
-//   //   console.log("primera");
-//   console.log(usuario4);
-//   const fff = () => {
-//     //     let list = [];
-//     //     const querySnapshot = await getDocs(collection(db, "Cotiza"));
-//     //     querySnapshot.forEach(doc => {
-//     //       list.push(doc.data());
-//     //       console.log(doc.data());
-//     //       console.log("lista", list);
-//     //     });
-
-//     //     console.log(list);
-//     setusuario4(d++);
-//     console.log(usuario4);
-//   };
-//   fff();
-
-//   //   // return [tomarDatos];
-//   // }, [d]);
-//   return usuario4;
-// };
-
-// export const useGet = () => {
-//   const [data, setData] = useState(0);
-//   // const [usuario4, setusuario4] = useState(5);
-//   const [error, setError] = useState(false);
-//   const getDatos =  () => {
-//     console.log("2 hook");
-//     try {
-//       // const { data } = await API.get(endpoint);
-
-//       setTimeout(() => {
-//         setData("d");
-//         // setusuario4(d);
-//       }, 2000);
-//     } catch (error) {
-//       setError(true);
-//     }
-//   };
-
-//   // useEffect(() => {
-//     getDatos();
-//   // }, []);
-//   return [data, error];
-// };
-
-// export const usegetDatos = (()) => {
-//   const [data, setData] = useState([]);
-//   // const [usuario4, setusuario4] = useState(5);
-//   const [error, setError] = useState(false);
-
-//   const getDatos = async (arrays) => {
-//     console.log("2 hook");
-//     try {
-
-//               let lista = [];
-//               const querySnapshot = await getDocs(collection(db, "Cotiza"));
-//               querySnapshot.forEach(doc => {
-//                 lista.push(doc.data());
-//                 console.log(doc.data());
-//                 console.log("lista", lista);
-//               });
-//         setData(lista[1] );
-//       } catch (error) {
-//         setError(true);
-//       }
-//     };
-
-//   useEffect(() => {
-//     getDatos(arrays);
-//   }, [arrays]);
-//   return [data, error];
-// };
-// const [idTotal, setidTotal] = useState()
-
-// useEffect(() => {
-
-//  const id = auth.currentUser.displayName
-//  console.log("aaaaaaaaaaaau",id);
-// }, [])
-
-// const dd=() => {
-
-// }
-
-// dd()
-
-///////////////
-
-// export const setCities = async dato => {
-//   try {
-//     const User = await getAuth().currentUser.uid;
-//     // console.log(
-//     //   "3333333333333333333333333333333333333333333333333333333333333333",
-//     //   User
-//     // );
-//     const docRef = await addDoc(collection(db, "users", User), {
-//       dato
-//     });
-//   } catch (e) {
-//     console.error("Error adding document: ", e);
-//   }
-// };

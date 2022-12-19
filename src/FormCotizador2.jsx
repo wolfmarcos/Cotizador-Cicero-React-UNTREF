@@ -43,15 +43,9 @@ const FormCotizador = ({ tomarData, cotiza, data, demora, funcionCotizar }) => {
       />
 
       <div className="center separador">
-        {demora ? (
+        
           <button className="button button-outline">Cotizar</button>
-        ) : (
-          <img
-            className="button button-outline"
-            src="/DEMORA.gif"
-            alt="page not found"
-          />
-        )}
+  
       </div>
     </form>
   );
