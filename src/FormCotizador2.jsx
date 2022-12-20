@@ -1,4 +1,4 @@
-// import  "../public/demora"
+
 
 const FormCotizador = ({ tomarData, cotiza, data, demora, funcionCotizar }) => {
   const { propiedad, ubicaciones, metros2 } = cotiza;

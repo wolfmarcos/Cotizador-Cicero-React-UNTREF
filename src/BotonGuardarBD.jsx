@@ -11,24 +11,36 @@ function BotonGuardarBD({ cotiza, fbid }) {
   const [demora, setDemora] = useState(true);
 
   useEffect(() => {
-    setDemora(false);
+    const local2 = JSON.parse(localStorage.getItem("items")) || [];
+    
+     
     const df = async () => {
-      const datoso = await data9;
-
-      if (datoso.length > 0) {
-        localStorage.setItem("items", JSON.stringify(datoso));
-        setlongitudDato((set) => (set = datoso.length));
-        setDemora(true);
-      }
-    };
-    df();
+        
+        const datoso = await data9;
+        
+        if (datoso.length > 0) {
+          localStorage.setItem("items", JSON.stringify(datoso));
+          setlongitudDato((set) => (set = datoso.length));
+          setDemora(true);
+        }
+        // else{
+          //   setDemora(true);
+          // }
+        };
+        if (local2 == 0) {
+           setDemora(false) 
+           df()
+          }else{
+            
+            setlongitudDato((set) => (set = local2.length));
+          }
+    
   }, [data9]);
 
   const posDescarga = async (lista=[]) => {
     
     if (lista.length >= 0) {
       const exito = await setDatos(lista, fbid);
-      console.log("🚀 ~ file: BotonGuardarBD.jsx:31 ~ posDescarga ~ exito", exito)
 
       setDemora((set) => (set = exito));
       Swal.fire({
@@ -53,7 +65,7 @@ function BotonGuardarBD({ cotiza, fbid }) {
   };
 
   return (
-    <>
+    <> 
       {demora ? (
         cotiza.costoM2 && !isNaN(cotiza.costoM2) ? (
           <div onClick={realizarGuardado}>

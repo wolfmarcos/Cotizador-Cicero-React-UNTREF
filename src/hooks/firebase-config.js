@@ -46,11 +46,7 @@ export const googleLogeo = async () => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const users = result.user;
-      console.log(users);
-      console.log(
-        "🚀 ~ file: firebase-config.js:165 ~ .then ~ users",
-        users.displayName
-      );
+
       // ...
       return {
         nombre: users.displayName,
@@ -75,7 +71,7 @@ export const actualUser = () => {
   // const [usuario, setusuario] = useState(null);
   useEffect(() => {
     const fff = async () => {
-      console.log("actualUser");
+      
       onAuthStateChanged(auth, (user) => {
         if (user) {
           setenCarga(1);
@@ -116,9 +112,9 @@ export const usegetDatos = (fbid1 = null) => {
 
       if (docSnap.exists()) {
         setData(async (set) => (set = await docSnap.data().datos));
-        console.log("lista", "docSnap.data()", docSnap.data().datos);
+      
       } else {
-        console.log("No such document!");
+   
       }
     } catch (error) {
       setError(true);
@@ -136,7 +132,7 @@ export const desLogGoogle = async () => {
   return signOut(auth)
     .then((desLog) => desLog)
     .catch((error) => {
-      console.log(error);
+  
     });
 };
 
