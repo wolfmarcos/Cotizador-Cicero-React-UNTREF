@@ -22,12 +22,13 @@ function BotonGuardarBD({ cotiza, fbid }) {
       }
     };
     df();
-  }, [fbid, data9]);
+  }, [data9]);
 
-  const posDescarga = async (guardado, local) => {
-    const lista = [...local, guardado];
+  const posDescarga = async (lista=[]) => {
+    
     if (lista.length >= 0) {
       const exito = await setDatos(lista, fbid);
+      console.log("🚀 ~ file: BotonGuardarBD.jsx:31 ~ posDescarga ~ exito", exito)
 
       setDemora((set) => (set = exito));
       Swal.fire({
@@ -47,7 +48,8 @@ function BotonGuardarBD({ cotiza, fbid }) {
   const realizarGuardado = async () => {
     setDemora((set) => (set = false));
     const local = JSON.parse(localStorage.getItem("items")) || [];
-    posDescarga(cotiza, local);
+    const lista = [...local, cotiza];
+    posDescarga(lista);
   };
 
   return (

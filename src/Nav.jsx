@@ -20,7 +20,7 @@ function Nav() {
       sessionStorage.clear();
       setuserInfo((set) => (set = logeo));
     }
-  }, [isUsername, logeo]);
+  }, [isUsername]);
 
   // let history = useHistory();
   const desLogo = () => {

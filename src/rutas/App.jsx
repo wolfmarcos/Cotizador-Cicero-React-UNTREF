@@ -9,12 +9,10 @@ import { actualUser } from "../hooks/firebase-config";
 import BotonGuardarBD from "../BotonGuardarBD";
 
 function App() {
-  const [enCarga, usuario, fbid] = actualUser();
+  const [enCarga, fbid] = actualUser();
   const [Logeo, setLogeo] = useState(null);
 
-  useEffect(() => {
-    setLogeo((set) => (set = usuario));
-  }, [usuario]);
+
 
   const url2 = "https://api.npoint.io/2c789c463f2951308811";
 
@@ -134,7 +132,9 @@ function App() {
             <span id="valorPoliza">{cotiza.costoM2 || "00.0"}</span>
           </p>
           {/* (typeof usuario)!="String" */}
-          {Logeo == null ? (
+          {(enCarga===1 )? (
+              <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
+          ) : (
             <div onClick={deslogeado}>
               <h1 button class="button guardado">
                 💾
@@ -143,8 +143,6 @@ function App() {
                 "Para guardatodas sus cotizacionse debe estar registrado"{" "}
               </label>
             </div>
-          ) : (
-            <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
           )}
         </div>
       </div>

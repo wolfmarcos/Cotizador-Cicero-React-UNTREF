@@ -57,7 +57,7 @@ function Login2({ activa, setisUsername }) {
       <div className="contForm">
         <button
           id="google"
-          class="btn btn--1"
+          classNames="btn btn--1"
           style={{ marginLeft: "90%" }}
           onClick={activa}
         >
@@ -73,7 +73,7 @@ function Login2({ activa, setisUsername }) {
         <form onSubmit={porFormulario}>
           <div>
             <h2>
-              <label for="lN">email :</label>
+              <label htmlFor="lN">email :</label>
             </h2>{" "}
             <input
               value={email}
@@ -85,7 +85,7 @@ function Login2({ activa, setisUsername }) {
           </div>
           <div>
             <h2>
-              <label for="lC">contraseña :</label>
+              <label htmlFor="lC">contraseña :</label>
             </h2>
             <input
               value={password}
@@ -96,9 +96,9 @@ function Login2({ activa, setisUsername }) {
               onChange={(e) => setpassword(e.target.value)}
             />
           </div>
-          <input type="submit" class=" btn btn--4" />
+          <input type="submit" className=" btn btn--4" />
         </form>
-        <div class="contBtn"> </div>
+        <div className="contBtn"> </div>
       </div>
     </>
   );

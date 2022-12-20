@@ -17,13 +17,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
       <Routes>
         <Route path="/ErrorPage" element={<ErrorPage />}></Route>
-        <Route path="*" element={<Navigate to="cotizador" />}></Route>
-        <Route path="cotizador" element={<App />}></Route>
+        <Route path="/" element={<Navigate to="/cotizador" />}></Route>
+        <Route path="/cotizador" element={<App />}></Route>
 
         <Route element={<RutaProtegida />}>
-          <Route path="historial" element={<Historial />}>
-            <Route path=":id" element={<ErrorPage />}></Route>
-            <Route path=":*" element={<ErrorPage />}></Route>
+          <Route path="/historial" element={<Historial />}>
+            {/* <Route path=":id" element={<ErrorPage />}></Route> */}
+            {/* <Route path=":*" element={<ErrorPage />}></Route> */}
           </Route>
         </Route>
       </Routes>

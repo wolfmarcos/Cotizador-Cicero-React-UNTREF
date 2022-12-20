@@ -25,21 +25,20 @@ const Historial = () => {
           {guardadoCotizacion.map((data, i) => {
             return (
               <Tabla data={data} key={i} ide={i}>
-                {" "}
-                <Link
+                {/* <Link
                   style={{ position: "absolute" }}
                   to={"/" + i}
                   className="center div-cotizado"
                 >
-                  {"->"}{" "}
-                </Link>
+                  {"->"}
+                </Link> */}
               </Tabla>
             );
           })}
         </table>
         <div className="center separador">
           <Link to="/cotizador">
-            <button class="button button-outline">volver</button>
+            <button className="button button-outline">volver</button>
           </Link>
         </div>
       </div>

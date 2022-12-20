@@ -38,10 +38,6 @@ const db = getFirestore(app);
 export const auth = getAuth();
 const uids = null;
 
-// const datosDusuario = "no"
-
-// console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiin", datosDusuario);
-
 export const googleLogeo = async () => {
   const provider = new GoogleAuthProvider();
 
@@ -76,14 +72,14 @@ export const googleLogeo = async () => {
 export const actualUser = () => {
   const [enCarga, setenCarga] = useState(3);
   const [fbid, setfbid] = useState(null);
-  const [usuario, setusuario] = useState(null);
+  // const [usuario, setusuario] = useState(null);
   useEffect(() => {
     const fff = async () => {
       console.log("actualUser");
       onAuthStateChanged(auth, (user) => {
         if (user) {
           setenCarga(1);
-          setusuario((set) => (set = user.displayName));
+          // setusuario((set) => (set = user.displayName));
           setfbid((set) => (set = user.uid));
         } else {
           setenCarga(2);
@@ -94,7 +90,7 @@ export const actualUser = () => {
     fff();
   }, []);
 
-  return [enCarga, usuario, fbid];
+  return [enCarga, fbid];
 };
 
 export const setDatos = async (datos, usid) => {
@@ -143,14 +139,6 @@ export const desLogGoogle = async () => {
       console.log(error);
     });
 };
-
-// const idUsuario=" "
-// const fff=(to)=>{
-//   idUsuario=to
-//   console.log("🚀 ~~~~~~~~~~~~~~~~~~~~~~~~~~~ file: firebase-config.js:55 ~ gle ~ uids", idUsuario)
-// }
-
-//terminar de resivir del local hacer la validacion si este o no  conectado hacer el cambio de linck terminar de ver el video
 
 export const correoLogeo = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)

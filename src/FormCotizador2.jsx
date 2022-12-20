@@ -1,10 +1,12 @@
+// import  "../public/demora"
+
 const FormCotizador = ({ tomarData, cotiza, data, demora, funcionCotizar }) => {
   const { propiedad, ubicaciones, metros2 } = cotiza;
 
   return (
     <form onSubmit={funcionCotizar}>
       <h2 className="center separador">Completa los datos solicitados</h2>
-      <label for="propiedad">Selecciona el tipo de propiedad </label>
+      <label htmlFor="propiedad">Selecciona el tipo de propiedad </label>
       <select name="propiedad" value={propiedad} onChange={tomarData}>
         <option>...</option>
         {data.propiedades.map((prop, i) => {
@@ -40,7 +42,9 @@ const FormCotizador = ({ tomarData, cotiza, data, demora, funcionCotizar }) => {
       />
 
       <div className="center separador">
-        <button className="button button-outline">Cotizar</button>
+        
+          <button className="button button-outline">Cotizar</button>
+  
       </div>
     </form>
   );
