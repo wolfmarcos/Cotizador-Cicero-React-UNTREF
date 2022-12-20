@@ -9,12 +9,8 @@ import { actualUser } from "../hooks/firebase-config";
 import BotonGuardarBD from "../BotonGuardarBD";
 
 function App() {
-  ////////////
-
   const [enCarga, usuario, fbid] = actualUser();
   const [Logeo, setLogeo] = useState(null);
-
-  // const usuario=true
 
   useEffect(() => {
     setLogeo((set) => (set = usuario));
@@ -41,27 +37,23 @@ function App() {
 
   const sertifica = () => {
     console.log(cotiza.propiedad);
-   if (
+    if (
       cotiza.propiedad == "" ||
       cotiza.propiedad == null ||
       isNaN(cotiza.propiedad)
     ) {
       Swal.fire({ title: "No ingreso tipo de propiedad", icon: "warning" });
       return false;
-    }
-
-    else if (
-     
-      cotiza.ubicaciones ==" "||
-      cotiza.ubicaciones == null||
+    } else if (
+      cotiza.ubicaciones == " " ||
+      cotiza.ubicaciones == null ||
       isNaN(cotiza.ubicaciones)
-    ) { console.log( cotiza.ubicaciones, typeof cotiza.ubicaciones ); 
+    ) {
+      console.log(cotiza.ubicaciones, typeof cotiza.ubicaciones);
       Swal.fire({ title: "no ingreso la ubicaciones", icon: "warning" });
       return false;
-    }
-
-    else if (
-      cotiza.metros2 == " "||
+    } else if (
+      cotiza.metros2 == " " ||
       cotiza.metros2 == null ||
       isNaN(cotiza.metros2)
     ) {
@@ -70,13 +62,12 @@ function App() {
         icon: "warning",
       });
       return false;
-    }else{
-
+    } else {
       return true;
     }
-
   };
-  const deslogeado = () => alert("se deve Logear");
+  const deslogeado = () =>
+    Swal.fire({ title: "Aun no esta registrado", icon: "warning" });
 
   const recargaDatos = () => {
     let propiedad = data.propiedades.filter((props) => {
@@ -101,14 +92,9 @@ function App() {
 
   const funcionCotizar = (e) => {
     e.preventDefault();
-    const datosCompletados=sertifica()
+    const datosCompletados = sertifica();
     console.log(datosCompletados);
     if (datosCompletados) {
-      // setDemora((set) => (set = false));
-      // setTimeout(() => {
-      //   setDemora((set) => (set = true));
-      // }, 1000);
-
       Swal.fire({
         position: "center",
         icon: "success",
@@ -126,7 +112,6 @@ function App() {
       recargaDatos();
     }
   };
-  // console.log("🚀 ~ file: App.jsx:152 ~ App ~ sdfsdfsdf",typeof ( typeof usuario))
 
   return (
     <div className="App">
@@ -152,19 +137,15 @@ function App() {
           {Logeo == null ? (
             <div onClick={deslogeado}>
               <h1 button class="button guardado">
-                💾{" "}
+                💾
               </h1>
               <label>
-                {" "}
-                "Para guardatodas sus cotizacionse deve estar registrado"{" "}
+                "Para guardatodas sus cotizacionse debe estar registrado"{" "}
               </label>
             </div>
           ) : (
-            // <Link to="/historial">
-            // "  nada"
             <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
-            // </Link>
-          )}{" "}
+          )}
         </div>
       </div>
     </div>

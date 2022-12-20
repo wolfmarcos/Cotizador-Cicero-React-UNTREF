@@ -8,25 +8,20 @@ import ErrorPage from "./ErrorPage";
 function RutaProtegida() {
   const [isAuth, setisAuth] = useState(3);
 
-  const autenticador =  async() => {
-    
-    const [enCarga, usuario] =  await actualUser();
-     
-      setisAuth(set => (set = enCarga));
-    };
-   
-    
+  const autenticador = async () => {
+    const [enCarga, usuario] = await actualUser();
 
+    setisAuth((set) => (set = enCarga));
+  };
 
   autenticador();
 
   if (isAuth == 1) {
- 
-  //  alert("entro en 1",isAuth) 
+    //  alert("entro en 1",isAuth)
     // let timerInterval
     // Swal.fire({
     //   title: 'Gracias '+usuarios +" pongame un 10",
-      
+
     //   imageUrl: "/bienvenido2.gif",
     //   imageWidth: 400,
     //   html: 'I will close in <b></b> milliseconds.',
@@ -47,19 +42,13 @@ function RutaProtegida() {
     // }).then((result) => {
     //   /* Read more about handling dismissals below */
     //   if (result.dismiss === Swal.DismissReason.timer) {
-    //  
+    //
     //   }
     // })
-   
 
-  
-   
     return <Outlet />;
-
-
-
   } else if (isAuth == 2) {
-      // alert("entro en 2",isAuth) 
+    // alert("entro en 2",isAuth)
     Swal.fire({
       title: "Denegado!",
       text: "Realise su login",
@@ -67,7 +56,7 @@ function RutaProtegida() {
 
       imageWidth: 400,
       imageHeight: 200,
-      imageAlt: "Custom image"
+      imageAlt: "Custom image",
     });
 
     return <Navigate to="/cotizador" />;

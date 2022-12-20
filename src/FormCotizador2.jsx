@@ -1,6 +1,3 @@
-// import  i  from "./assets/images/Ellipsis-1.1s-44px.gif";
-// import  "../public/demora"
-
 const FormCotizador = ({ tomarData, cotiza, data, demora, funcionCotizar }) => {
   const { propiedad, ubicaciones, metros2 } = cotiza;
 
@@ -43,9 +40,7 @@ const FormCotizador = ({ tomarData, cotiza, data, demora, funcionCotizar }) => {
       />
 
       <div className="center separador">
-        
-          <button className="button button-outline">Cotizar</button>
-  
+        <button className="button button-outline">Cotizar</button>
       </div>
     </form>
   );

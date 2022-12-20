@@ -15,7 +15,6 @@ function Login2({ activa, setisUsername }) {
   const [Usuario, setUsuario] = useState(null);
 
   const sertifica = () => {
-
     if (
       !/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(email)
     ) {
@@ -48,11 +47,9 @@ function Login2({ activa, setisUsername }) {
   };
 
   const gooogleLog = async () => {
-    // const datosUsuario= await
     const logeo = await googleLogeo();
     sessionStorage.setItem("usuario", JSON.stringify(logeo));
     setisUsername((set) => !set);
-
   };
 
   return (

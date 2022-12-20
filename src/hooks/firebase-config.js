@@ -56,7 +56,11 @@ export const googleLogeo = async () => {
         users.displayName
       );
       // ...
-      return  {nombre :users.displayName ,email:users.email, token :credential.accessToken};
+      return {
+        nombre: users.displayName,
+        email: users.email,
+        token: credential.accessToken,
+      };
     })
     .catch((error) => {
       // Handle Errors here.
@@ -94,18 +98,18 @@ export const actualUser = () => {
 };
 
 export const setDatos = async (datos, usid) => {
-
   try {
     if (usid) {
-     await  setDoc(doc(db, "Cotiza", usid), {     datos     });
-       return true } else {   }
+      await setDoc(doc(db, "Cotiza", usid), { datos });
+      return true;
+    } else {
+    }
   } catch (error) {}
-  
-  return 
+
+  return;
 };
 
-export const usegetDatos = (fbid1=null) => {
-
+export const usegetDatos = (fbid1 = null) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
 
@@ -115,7 +119,7 @@ export const usegetDatos = (fbid1=null) => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setData(async(set)=>  set= await docSnap.data().datos);
+        setData(async (set) => (set = await docSnap.data().datos));
         console.log("lista", "docSnap.data()", docSnap.data().datos);
       } else {
         console.log("No such document!");
@@ -133,8 +137,8 @@ export const usegetDatos = (fbid1=null) => {
 
 export const desLogGoogle = async () => {
   const auth = getAuth();
- return signOut(auth)
-    .then((desLog) =>   desLog)
+  return signOut(auth)
+    .then((desLog) => desLog)
     .catch((error) => {
       console.log(error);
     });

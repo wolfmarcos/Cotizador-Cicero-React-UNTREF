@@ -42,8 +42,7 @@ label {
     margin: auto;
     max-width: 900px;
     background-color: white;
-    /* margin-left: 5%;
-    margin-right: 5%; */
+
     padding: 10px;
     border-color: whitesmoke;
     box-shadow: 26px 28px 15px -8px rgba(0, 0, 0, 0.15);
@@ -56,11 +55,10 @@ label {
 
 div.historial {
     cursor: pointer;
-    /* display: flex; */
-    /* float: right; */
+
     padding: 6px;
     border-radius: 25px;
-    /* width: 55px; */
+
     margin: 1vw;
     position: absolute;
     top: 0;
