@@ -4,10 +4,6 @@ import Swal from "sweetalert2";
 import { googleLogeo, correoLogeo } from "./hooks/firebase-config";
 import { Await } from "react-router";
 
-// import { useHistory } from "react-router-dom";
-
-//  const history = useHistory();
-
 function Login2({ activa, setisUsername }) {
   const [ususrio, setususrio] = useState({ email: "", password: "", id: "" });
   const [email, setemail] = useState("");
@@ -74,7 +70,7 @@ function Login2({ activa, setisUsername }) {
           <div>
             <h2>
               <label htmlFor="lN">email :</label>
-            </h2>{" "}
+            </h2>
             <input
               value={email}
               id="lN"

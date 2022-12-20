@@ -132,7 +132,7 @@ export const desLogGoogle = async () => {
   return signOut(auth)
     .then((desLog) => desLog)
     .catch((error) => {
-  
+      console.log(error);
     });
 };
 

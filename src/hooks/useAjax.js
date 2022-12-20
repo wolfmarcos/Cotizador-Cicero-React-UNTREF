@@ -17,9 +17,9 @@ export const useAjax = url => {
       })
       .catch(
         e => console.log("Pedido fallido", e)
-        //  setError(true)
+     
       );
-    //  setIsLoading(false)
+   
   }, [url]);
   return [data, isLoading];
 };

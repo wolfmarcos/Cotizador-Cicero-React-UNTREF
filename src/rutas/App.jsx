@@ -12,8 +12,6 @@ function App() {
   const [enCarga, fbid] = actualUser();
   const [Logeo, setLogeo] = useState(null);
 
-
-
   const url2 = "https://api.npoint.io/2c789c463f2951308811";
 
   const [data, isLoading] = useAjax(url2);
@@ -132,15 +130,22 @@ function App() {
             <span id="valorPoliza">{cotiza.costoM2 || "00.0"}</span>
           </p>
           {/* (typeof usuario)!="String" */}
-          {(enCarga===1 )? (
-              <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
-          ) : (
+          {enCarga == 1 ? 
+          (
+            <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
+          )
+          
+          
+          : 
+          
+          
+          (
             <div onClick={deslogeado}>
-              <h1 button class="button guardado">
+              <h1 button className="button guardado">
                 💾
               </h1>
               <label>
-                "Para guardatodas sus cotizacionse debe estar registrado"{" "}
+                "Para guardatodas sus cotizacionse debe estar registrado"
               </label>
             </div>
           )}

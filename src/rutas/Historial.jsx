@@ -23,17 +23,7 @@ const Historial = () => {
             </tr>
           </thead>
           {guardadoCotizacion.map((data, i) => {
-            return (
-              <Tabla data={data} key={i} ide={i}>
-                {/* <Link
-                  style={{ position: "absolute" }}
-                  to={"/" + i}
-                  className="center div-cotizado"
-                >
-                  {"->"}
-                </Link> */}
-              </Tabla>
-            );
+            return <Tabla data={data} key={i} ide={i}></Tabla>;
           })}
         </table>
         <div className="center separador">

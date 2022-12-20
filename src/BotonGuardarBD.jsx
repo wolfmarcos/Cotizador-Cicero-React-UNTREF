@@ -23,9 +23,7 @@ function BotonGuardarBD({ cotiza, fbid }) {
           setlongitudDato((set) => (set = datoso.length));
           setDemora(true);
         }
-        // else{
-          //   setDemora(true);
-          // }
+   
         };
         if (local2 == 0) {
            setDemora(false) 
