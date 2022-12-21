@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
-function BotonGuardarBD({ cotiza, fbid }) {
+function BotonGuardarBD({ cotiza={}, fbid="" }) {
   const [data9, error] = usegetDatos(fbid);
 
   const [guardadoCotizacion, setguardadoCotizacion] = useState([]);

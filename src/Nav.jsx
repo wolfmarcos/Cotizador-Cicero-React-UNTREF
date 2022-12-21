@@ -26,7 +26,7 @@ function Nav() {
   const desLogo = () => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: "btn btn-success",
+        confirmButton: "btn btn--2:",
         cancelButton: "btn btn-danger",
       },
       buttonsStyling: false,
@@ -38,8 +38,8 @@ function Nav() {
         // text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "<h3>Deslogear!</h3>",
-        cancelButtonText: " <h3>Informacion Usuario</h3>",
+        confirmButtonText: "<h4>Deslogear!</h4>",
+        cancelButtonText: " <h4>Informacion Usuario</h4>",
         reverseButtons: true,
       })
       .then((result) => {

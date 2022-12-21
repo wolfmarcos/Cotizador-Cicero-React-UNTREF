@@ -57,7 +57,7 @@
   border-radius: 4px;
   text-transform: uppercase;
   background-color: transparent;
-  color: #fff;
+  color: rgb(41, 38, 38);
   font-size: 28px;
   overflow: hidden;
   transition: all 500ms ease;
@@ -68,7 +68,7 @@
   cursor: pointer;
   border-radius: 28px;
   padding: 2%;
-
+text-shadow: 1px 1px 1px #0f0d0d;
 }
 
 .btn::before {

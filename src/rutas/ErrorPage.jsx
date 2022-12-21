@@ -15,7 +15,7 @@ export default function ErrorPage() {
 
       <Link to="/historial">📋</Link>
       <Link to="/">
-        <button class="button button-outline">volver</button>
+        <button className="button button-outline">volver</button>
       </Link>
       <img
         style={{ width: "500px", objectFit: "cover" }}

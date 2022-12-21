@@ -17,15 +17,19 @@ function App() {
   const [data, isLoading] = useAjax(url2);
 
   const objetoCotizar = {
-    costoM2: null,
-    propiedad: null,
-    ubicaciones: null,
-    metros2: null,
+    costoM2:"",
+    propiedad:"",
+    ubicaciones:"",
+    metros2:"",
     fecha: DataTime(),
   };
   const [cotiza, setcotiza] = useState(objetoCotizar);
 
-  if (isLoading) return <h3>Loading...</h3>;
+  if (isLoading) {return   <img
+    className="center separador"
+    src="/louf.gif"
+    alt="page not found"
+  />}
 
   function tomarData(e) {
     setcotiza((set) => ({ ...set, [e.target.name]: e.target.value }));
@@ -34,14 +38,14 @@ function App() {
   const sertifica = () => {
     console.log(cotiza.propiedad);
     if (
-      cotiza.propiedad == "" ||
+      cotiza.propiedad ===" " ||
       cotiza.propiedad == null ||
       isNaN(cotiza.propiedad)
     ) {
       Swal.fire({ title: "No ingreso tipo de propiedad", icon: "warning" });
       return false;
     } else if (
-      cotiza.ubicaciones == " " ||
+      cotiza.ubicaciones ==="" ||
       cotiza.ubicaciones == null ||
       isNaN(cotiza.ubicaciones)
     ) {
@@ -49,7 +53,7 @@ function App() {
       Swal.fire({ title: "no ingreso la ubicaciones", icon: "warning" });
       return false;
     } else if (
-      cotiza.metros2 == " " ||
+      cotiza.metros2 ==="" ||
       cotiza.metros2 == null ||
       isNaN(cotiza.metros2)
     ) {
@@ -111,7 +115,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 o className="center separador">
+      <h1  className="center separador">
         Seguros del hogar 🏡
       </h1>
 
@@ -126,20 +130,13 @@ function App() {
 
         <div className="center separador">
           <p className="importe">
-            Precio estimado: ${" "}
+            Precio estimado: $
             <span id="valorPoliza">{cotiza.costoM2 || "00.0"}</span>
           </p>
           {/* (typeof usuario)!="String" */}
-          {enCarga == 1 ? 
-          (
+          {enCarga == 1 ? (
             <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
-          )
-          
-          
-          : 
-          
-          
-          (
+          ) : (
             <div onClick={deslogeado}>
               <h1 button className="button guardado">
                 💾
