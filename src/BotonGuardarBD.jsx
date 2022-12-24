@@ -18,7 +18,7 @@ function BotonGuardarBD({ cotiza={}, fbid="" }) {
         
         const datoso = await data9;
         
-        if (datoso.length > 0) {
+        if (datoso.length >= 0) {
           localStorage.setItem("items", JSON.stringify(datoso));
           setlongitudDato((set) => (set = datoso.length));
           setDemora(true);
