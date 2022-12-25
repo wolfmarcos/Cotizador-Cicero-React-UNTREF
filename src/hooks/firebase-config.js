@@ -67,7 +67,7 @@ export const googleLogeo = async () => {
 
 export const actualUser = () => {
   const [enCarga, setenCarga] = useState(3);
-  const [fbid, setfbid] = useState(null);
+  const [fbid, setfbid] = useState("");
   // const [usuario, setusuario] = useState(null);
   useEffect(() => {
     const fff = async () => {
