@@ -79,16 +79,23 @@ function BotonGuardarBD({ cotiza = {}, fbid = "" }) {
         timer: 1500,
       });
 
-      localStorage.setItem("items", JSON.stringify(lista));
+     
+      // localStorage.setItem("items", JSON.stringify(lista));
+      setUserF((prev) => ({
+        ...prev,
+        colecionCotizacion: lista,
+      }));
 
-      setlongitudDato((set) => (set = lista.length));
+      // setlongitudDato((set) => (set = lista.length));
+      setlongitudDato((set) => (set = userF.colecionCotizacion.length));
+
     }
   };
 
   const realizarGuardado = async () => {
     setDemora((set) => (set = false));
-    const local = JSON.parse(localStorage.getItem("items")) || [];
-    const lista = [...local, cotiza];
+    // const local = JSON.parse(localStorage.getItem("items")) || [];
+    const lista = [...userF.colecionCotizacion, cotiza];
     posDescarga(lista);
   };
 
