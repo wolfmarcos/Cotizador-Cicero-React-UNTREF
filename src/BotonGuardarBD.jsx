@@ -18,21 +18,24 @@ function BotonGuardarBD({ cotiza={}, fbid="" }) {
         
         const datoso = await data9;
         
-        if (datoso.length >= 0) {
+        if (datoso.length > 0) {
           localStorage.setItem("items", JSON.stringify(datoso));
           setlongitudDato((set) => (set = datoso.length));
           setDemora(true);
         }
    
-        };
-        if (local2 == 0) {
-           setDemora(false) 
-           df()
-          }else{
-            
-            setlongitudDato((set) => (set = local2.length));
-          }
-    
+      else {
+         alert("usuario nuevo")
+        setDemora(true);
+        setlongitudDato((set) => (set = local2.length));
+      }
+    };
+    if (local2.length == 0) {
+      setDemora(false);
+      df();
+    } else {
+      setlongitudDato((set) => (set = local2.length));
+    }
   }, [data9]);
 
   const posDescarga = async (lista=[]) => {
