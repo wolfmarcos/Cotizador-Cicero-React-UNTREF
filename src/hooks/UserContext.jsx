@@ -1,11 +1,18 @@
-import { createContext, useState } from 'react';
+import { createContext, useState,useEffect } from 'react';
+
+
 export const UserContext = createContext();
 
+
+
 export const UserProvider = ({ children }) => {
-  const [userF, setUserF] = useState({usuario:{nombre:"asdasd"},cotiza:{fecha:"asdasd"},colecionCotizacion:[{datoDeCotizacion:"asdasd"},{datoDeCotizacion:"asdasd"}]});
-  return (
-    <UserContext.Provider value={{ userF, setUserF }}>
+  
+  // useEffect(() => {
+    const [userF, setUserF] = useState({usuario:{nombre:"asdasd"},cotiza:{fecha:"asdasd"},colecionCotizacion:[{}]});
+    return (
+      <UserContext.Provider value={{ userF, setUserF }}>
       {children}
     </UserContext.Provider>
   );
+// }, [])
 };

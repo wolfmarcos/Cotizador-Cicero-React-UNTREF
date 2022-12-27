@@ -101,7 +101,7 @@ export const setDatos = async (datos, usid) => {
   return;
 };
 
-export const usegetDatos = (fbid1 = null) => {
+export const useGetDatos = (fbid1 = null) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
 

@@ -12,9 +12,7 @@ const Historial = () => {
   const [guardadoCotizacion, setguardadoCotizacion] = useState(items);
   return (
     <>
-      <h1>
-      {userF}
-    </h1>
+    
       <h1 className="center separador">Historial 📋</h1>
 
       <div className=" center div-cotizador">
@@ -29,7 +27,7 @@ const Historial = () => {
               <th>Póliza mensual</th>
             </tr>
           </thead>
-          {guardadoCotizacion.map((data, i) => {
+          {userF.colecionCotizacion?.map((data, i) => {
             return <Tabla data={data} key={i} ide={i}></Tabla>;
           })}
         </table>

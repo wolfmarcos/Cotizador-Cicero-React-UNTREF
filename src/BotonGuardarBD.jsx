@@ -1,4 +1,4 @@
-import { usegetDatos, setDatos } from "./hooks/firebase-config";
+import { useGetDatos, setDatos } from "./hooks/firebase-config";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
@@ -6,83 +6,59 @@ import { useContext } from "react";
 import { UserContext } from "./hooks/UserContext";
 // import { UserProvider } from "./hooks/UserProvaider"
 
+function BotonGuardarBD({ cotiza = {}, fbid = "" }) {
+  const { userF, setUserF } = useContext(UserContext);
 
-function BotonGuardarBD({ cotiza={}, fbid="" }) {
-  const { userF , setUserF } = useContext(UserContext);
-  const user2= {...userF,cotiza}
-  // const user2= {...userF,cotiza:{...cotiza}}
-  console.log("🚀 ~ file: BotonGuardarBD.jsx:14 ~ BotonGuardarBD ~ user2", user2)
-  console.log("🚀 ~ file: BotonGuardarBD.jsx:13 ~ BotonGuardarBD ~ userF", userF)
-  // setUser(user2)
+  // const dupli = { fecha: "ppppp" };
 
-  // console.log("🚀 ~ file: BotonGuardarBD.jsx:13 ~ BotonGuardarBD ~ user2", user2)
-if (true) {
-  
-  return (
-  
-    <h1>Usuario:
-      { userF.cotiza?.fecha}
-    </h1>
-    )
-    
+  // useEffect(() => {
+  //   setUserF((prev) => ({ ...prev, cotiza }));
+  //   // const user2= {...userF,cotiza:[cotiza]}
+  // }, []);
 
-     
-}
-else{
+  const [data9, error] = useGetDatos(fbid);
 
-
-
-
-
-
-  const [data9, error] = usegetDatos(fbid);
-  // console.log("🚀 ~ file: BotonGuardarBD.jsx:12 ~ BotonGuardarBD ~ user", user)
-  // setUser(set=>user["cotiza22"]=cotiza)
-  // setUser((set)=>(set={...set.cotiza22,...cotiza}))
-  // const setUser2=user.map(user=>user["cotiza22"]=cotiza)
-  // const setUser2=user.map(user=>user.cotiza22=cotiza)
-  // const setUser2={...user,cotiza22:cotiza}
-  // setUser((set)=>(set={...set.cotiza22,}))
-
-  // setUser((set)=>({...set,cotiza22:{...cotiza}}))
-  //  const user2= {...user,cotiza22:cotiza}
-//  const user2= {...user,cotiza22:{...cotiza}}
-  // console.log("🚀 ~ file: BotonGuardarBD.jsx:15 ~ BotonGuardarBD ~ setUser2", user2)
-
-  // console.log("🚀 ~ file: BotonGuardarBD.jsx:12 ~ BotonGuardarBD ~ userrrrrr", user)
-  // setUser((set)=>({...set.primerCotizacion,cotiza:"bbbbb"}))
-  // const [guardadoCotizacion, setguardadoCotizacion] = useContext(UserProvider);
-  // setguardadoCotizacion("hola")
   const [longitudDato, setlongitudDato] = useState(0);
   const [demora, setDemora] = useState(true);
 
   useEffect(() => {
     const local2 = JSON.parse(localStorage.getItem("items")) || [];
-    
-     
+    console.log("🚀 ~ file: BotonGuardarBD.jsx:26 ~ useEffect ~ local2", local2)
+
     const df = async () => {
         
-        const datoso = await data9;
-        
-        if (datoso.length >= 0) {
-          localStorage.setItem("items", JSON.stringify(datoso));
-          setlongitudDato((set) => (set = datoso.length));
-          setDemora(true);
-        }
-   
-        };
-        if (local2 == 0) {
-           setDemora(false) 
-           df()
-          }else{
-            
-            setlongitudDato((set) => (set = local2.length));
-          }
-    
-  }, [data9]);
+      const colecionCotizacion = await data9 || null;
+      console.log("🚀 ~ file: BotonGuardarBD.jsx:31 ~ df ~ colecionCotizacion", colecionCotizacion)
+      
+      if (colecionCotizacion.length > 0) {
+        localStorage.setItem("items", JSON.stringify(colecionCotizacion));
+        setlongitudDato((set) => (set = colecionCotizacion.length));
+        setDemora(true);
+        // setUserF((prev) =>({...prev, colecionCotizacion}))
+        setUserF((prev) =>({...prev, colecionCotizacion:[...colecionCotizacion]}))
+        console.log("🚀 ~ file: BotonGuardarBD.jsx:38 ~ df ~ setUserF", userF)
 
-  const posDescarga = async (lista=[]) => {
-    
+
+      }
+ 
+    else if (colecionCotizacion.length == 0){
+      //  alert("usuario nuevo")
+      // setTimeout(() => {
+       
+        setDemora(true);
+        setlongitudDato((set) => (set = local2.length));
+      // }, 2000);
+    }
+  };
+  if (local2.length == 0) {
+    setDemora(false);
+    df();
+  } else {
+    setlongitudDato((set) => (set = local2.length));
+  }
+}, [data9]);
+
+  const posDescarga = async (lista = []) => {
     if (lista.length >= 0) {
       const exito = await setDatos(lista, fbid);
 
@@ -109,8 +85,7 @@ else{
   };
 
   return (
-    <> 
-
+    <>
       {demora ? (
         cotiza.costoM2 && !isNaN(cotiza.costoM2) ? (
           <div onClick={realizarGuardado}>
@@ -151,8 +126,6 @@ else{
       )}
     </>
   );
-}
-
 }
 
 export default BotonGuardarBD;
