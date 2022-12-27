@@ -10,24 +10,25 @@ function BotonGuardarBD({ cotiza={}, fbid="" }) {
   const [longitudDato, setlongitudDato] = useState(0);
   const [demora, setDemora] = useState(true);
 
-  useEffect(() => {
+ useEffect(() => {
     const local2 = JSON.parse(localStorage.getItem("items")) || [];
-    
-     
+    console.log(
+      "🚀 ~ file: BotonGuardarBD.jsx:26 ~ useEffect ~ local2",
+      local2
+    );
+
     const df = async () => {
-        
-        const datoso = await data9;
-        
-        if (datoso.length > 0) {
-          localStorage.setItem("items", JSON.stringify(datoso));
-          setlongitudDato((set) => (set = datoso.length));
-          setDemora(true);
-        }
-   
-      else {
-         alert("usuario nuevo")
+      const colecionCotizacion = (await data9) || null;
+       if (colecionCotizacion.length > 0) {
+        localStorage.setItem("items", JSON.stringify(colecionCotizacion));
+        setlongitudDato((set) => (set = colecionCotizacion.length));
+        setDemora(true);
+        // setUserF((prev) =>({...prev, colecionCotizacion}))
+        } else if (colecionCotizacion.length == 0) {
+         // setTimeout(() => {
         setDemora(true);
         setlongitudDato((set) => (set = local2.length));
+        // }, 400);
       }
     };
     if (local2.length == 0) {
