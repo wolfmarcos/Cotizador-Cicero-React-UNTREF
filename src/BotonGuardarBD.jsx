@@ -36,32 +36,33 @@ function BotonGuardarBD({ cotiza = {}, fbid = "" }) {
       );
 
       if (colecionCotizacion.length > 0) {
-        localStorage.setItem("items", JSON.stringify(colecionCotizacion));
-        setlongitudDato((set) => (set = colecionCotizacion.length));
-        setDemora(true);
-        // setUserF((prev) =>({...prev, colecionCotizacion}))
+        // localStorage.setItem("items", JSON.stringify(colecionCotizacion));
         setUserF((prev) => ({
           ...prev,
           colecionCotizacion: [...colecionCotizacion],
         }));
+        setlongitudDato((set) => (set = userF.colecionCotizacion.length));
+        setDemora(true);
+        // setUserF((prev) =>({...prev, colecionCotizacion}))
         console.log("🚀 ~ file: BotonGuardarBD.jsx:38 ~ df ~ setUserF", userF);
       } else if (colecionCotizacion.length == 0) {
         //  alert("usuario nuevo")
         // setTimeout(() => {
 
         setDemora(true);
-        setlongitudDato((set) => (set = local2.length));
+        setlongitudDato((set) => (set = userF.colecionCotizacion.length));
         // }, 2000);
       }
       else{
         console.log("nada = null");
       }
     };
-    if (local2.length == 0) {
+    console.log("🚀 ~ file: BotonGuardarBD.jsx:61 ~ useEffect ~ userF.colecionCotizacion.lengt", userF.colecionCotizacion.length)
+    if (userF.colecionCotizacion.length == 0) {
       setDemora(false);
       df();
     } else {
-      setlongitudDato((set) => (set = local2.length));
+      setlongitudDato((set) => (set = userF.colecionCotizacion.length));
     }
   }, [data9]);
 
