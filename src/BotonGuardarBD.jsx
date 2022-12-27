@@ -12,28 +12,35 @@ function BotonGuardarBD({ cotiza={}, fbid="" }) {
 
   useEffect(() => {
     const local2 = JSON.parse(localStorage.getItem("items")) || [];
-    
-     
+    console.log("🚀 ~ file: BotonGuardarBD.jsx:26 ~ useEffect ~ local2", local2)
+
     const df = async () => {
         
-        const datoso = await data9;
-        
-        if (datoso.length > 0) {
-          localStorage.setItem("items", JSON.stringify(datoso));
-          setlongitudDato((set) => (set = datoso.length));
-          setDemora(true);
-        }
-   
-        };
-        if (local2 == 0) {
-           setDemora(false) 
-           df()
-          }else{
-            
-            setlongitudDato((set) => (set = local2.length));
-          }
-    
-  }, [data9]);
+      const datoso = await data9 || null;
+      console.log("🚀 ~ file: BotonGuardarBD.jsx:31 ~ df ~ datoso", datoso)
+      
+      if (datoso.length > 0) {
+        localStorage.setItem("items", JSON.stringify(datoso));
+        setlongitudDato((set) => (set = datoso.length));
+        setDemora(true);
+      }
+ 
+    else if (datoso.length == 0){
+      //  alert("usuario nuevo")
+      setTimeout(() => {
+       
+        setDemora(true);
+        setlongitudDato((set) => (set = local2.length));
+      }, 2000);
+    }
+  };
+  if (local2.length == 0) {
+    setDemora(false);
+    df();
+  } else {
+    setlongitudDato((set) => (set = local2.length));
+  }
+}, [data9]);
 
   const posDescarga = async (lista=[]) => {
     
