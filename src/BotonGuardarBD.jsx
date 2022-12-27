@@ -23,40 +23,47 @@ function BotonGuardarBD({ cotiza = {}, fbid = "" }) {
 
   useEffect(() => {
     const local2 = JSON.parse(localStorage.getItem("items")) || [];
-    console.log("🚀 ~ file: BotonGuardarBD.jsx:26 ~ useEffect ~ local2", local2)
+    console.log(
+      "🚀 ~ file: BotonGuardarBD.jsx:26 ~ useEffect ~ local2",
+      local2
+    );
 
     const df = async () => {
-        
-      const colecionCotizacion = await data9 || null;
-      console.log("🚀 ~ file: BotonGuardarBD.jsx:31 ~ df ~ colecionCotizacion", colecionCotizacion)
-      
+      const colecionCotizacion = (await data9) || null;
+      console.log(
+        "🚀 ~ file: BotonGuardarBD.jsx:31 ~ df ~ colecionCotizacion",
+        colecionCotizacion
+      );
+
       if (colecionCotizacion.length > 0) {
         localStorage.setItem("items", JSON.stringify(colecionCotizacion));
         setlongitudDato((set) => (set = colecionCotizacion.length));
         setDemora(true);
         // setUserF((prev) =>({...prev, colecionCotizacion}))
-        setUserF((prev) =>({...prev, colecionCotizacion:[...colecionCotizacion]}))
-        console.log("🚀 ~ file: BotonGuardarBD.jsx:38 ~ df ~ setUserF", userF)
+        setUserF((prev) => ({
+          ...prev,
+          colecionCotizacion: [...colecionCotizacion],
+        }));
+        console.log("🚀 ~ file: BotonGuardarBD.jsx:38 ~ df ~ setUserF", userF);
+      } else if (colecionCotizacion.length == 0) {
+        //  alert("usuario nuevo")
+        // setTimeout(() => {
 
-
-      }
- 
-    else if (colecionCotizacion.length == 0){
-      //  alert("usuario nuevo")
-      // setTimeout(() => {
-       
         setDemora(true);
         setlongitudDato((set) => (set = local2.length));
-      // }, 2000);
+        // }, 2000);
+      }
+      else{
+        console.log("nada = null");
+      }
+    };
+    if (local2.length == 0) {
+      setDemora(false);
+      df();
+    } else {
+      setlongitudDato((set) => (set = local2.length));
     }
-  };
-  if (local2.length == 0) {
-    setDemora(false);
-    df();
-  } else {
-    setlongitudDato((set) => (set = local2.length));
-  }
-}, [data9]);
+  }, [data9]);
 
   const posDescarga = async (lista = []) => {
     if (lista.length >= 0) {
