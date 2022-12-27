@@ -5,11 +5,11 @@ import { useContext } from "react";
 import { UserContext } from "../hooks/UserContext"; 
 
 const Historial = () => {
-  const items = JSON.parse(localStorage.getItem("items")) || [];
-  const { userF, setUserF } = useContext(UserContext);
+  // const items = JSON.parse(localStorage.getItem("items")) || [];
+  // const [guardadoCotizacion, setguardadoCotizacion] = useState(items);
+  const { userF } = useContext(UserContext);
 
 
-  const [guardadoCotizacion, setguardadoCotizacion] = useState(items);
   return (
     <>
     
