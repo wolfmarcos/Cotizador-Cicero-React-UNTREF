@@ -117,7 +117,9 @@ function App() {
     <div className="App">
       <h1  className="center separador">
         Seguros del hogar 🏡
+{process.env.REACT_APP_apiKey}
       </h1>
+
 
       <div className=" center div-cotizador">
         <FormCotizador
