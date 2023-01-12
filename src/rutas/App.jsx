@@ -112,6 +112,7 @@ function App() {
       recargaDatos();
     }
   };
+  console.log("entroaaaa");
   console.log("process.env.:",process.env.REACT_APP_apiKey);
 
   return (
