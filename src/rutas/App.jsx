@@ -113,7 +113,7 @@ function App() {
     }
   };
   console.log("entroaaaa");
-  console.log("process.env.:",process.env.REACT_APP_apiKey);
+  console.log("process.env.:",process.env.VITE_REACT_APP_apiKey);
 
   return (
     <div className="App">
