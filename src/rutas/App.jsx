@@ -118,7 +118,7 @@ function App() {
     <div className="App">
       <h1  className="center separador">
         Seguros del hogar 22 🏡
-{process.env.REACT_APP_apiKey}
+{/* {process.env.REACT_APP_apiKey} */}
       </h1>
 
 
