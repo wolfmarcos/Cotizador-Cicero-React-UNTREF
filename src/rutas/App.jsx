@@ -112,8 +112,8 @@ function App() {
       recargaDatos();
     }
   };
-  console.log("entroaaaa");
   console.log("process.env.:",process.env.VITE_REACT_APP_apiKey);
+  console.log("entroaaaa22");
 
   return (
     <div className="App">
