@@ -112,12 +112,15 @@ function App() {
       recargaDatos();
     }
   };
+  console.log("process.env.:",process.env.REACT_APP_apiKey);
 
   return (
     <div className="App">
       <h1  className="center separador">
-        Seguros del hogar 🏡
+        Seguros del hogar 22 🏡
+{process.env.REACT_APP_apiKey}
       </h1>
+
 
       <div className=" center div-cotizador">
         <FormCotizador
