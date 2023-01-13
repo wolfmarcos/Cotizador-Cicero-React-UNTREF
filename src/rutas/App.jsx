@@ -113,7 +113,7 @@ function App() {
     }
   };
   // console.log("process.env.:",process.env.VITE_REACT_APP_apiKey);
-  // console.log("entroaaaa22");
+   console.log("entroaaaa22");
 
   if(import.meta.env.MODE === "development"){
     console.log("process.env.:",process.env.VITE_REACT_APP_apiKey);
