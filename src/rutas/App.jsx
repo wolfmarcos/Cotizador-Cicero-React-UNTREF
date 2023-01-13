@@ -112,8 +112,15 @@ function App() {
       recargaDatos();
     }
   };
-  console.log("process.env.:",process.env.VITE_REACT_APP_apiKey);
-  console.log("entroaaaa22");
+  // console.log("process.env.:",process.env.VITE_REACT_APP_apiKey);
+  // console.log("entroaaaa22");
+
+  if(import.meta.env.MODE === "development"){
+    console.log("process.env.:",process.env.VITE_REACT_APP_apiKey);
+    }
+    else{
+    console.log("process.env.:", import.meta.env.VITE_REACT_APP_apiKey);
+    }
 
   return (
     <div className="App">
