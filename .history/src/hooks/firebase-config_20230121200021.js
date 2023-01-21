@@ -24,7 +24,6 @@ import {
 import { useEffect, useState } from "react";
 
 console.log(import.meta.env.VITE_APP_FB);
-console.log(JSON.parse(import.meta.env.VITE_APP_FB));
 const firebaseConfig = JSON.parse(import.meta.env.VITE_APP_FB);
 
 
