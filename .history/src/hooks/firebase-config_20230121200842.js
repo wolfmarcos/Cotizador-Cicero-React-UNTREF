@@ -24,9 +24,8 @@ import {
 import { useEffect, useState } from "react";
 
 const fbMarcos=import.meta.env.VITE_APP_FB;
-console.log("🚀 ~ file: firebase-config.js:27 ~ fbMarcos", fbMarcos)
 const fbMarcosOB=JSON.parse(fbMarcos);
-console.log(fbMarcosOB);
+console.log();
 const firebaseConfig = fbMarcosOB
 
 
