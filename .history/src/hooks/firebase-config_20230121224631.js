@@ -31,7 +31,7 @@ console.log("(!!!!!!!!!!!!!!!!!!!!!!!!!!",import.meta.env.VITE_APP_APIKEY);
 // const firebaseConfig = fbMarcosOB
 const firebaseConfig = {
 
-  apiKey:process.meta.env.VITE_APP_APIKEY,
+  apiKey:p meta.env.VITE_APP_APIKEY,
   authDomain: "cotizador-616a3.firebaseapp.com",
   projectId: "cotizador-616a3",
   storageBucket: "cotizador-616a3.appspot.com",

@@ -25,13 +25,11 @@ import { useEffect, useState } from "react";
 
 const fbMarcos=import.meta.env.VITE_APP_FB;
 console.log("🚀 ~ file: firebase-config.js:27 ~ fbMarcos", fbMarcos)
-console.log("(!!!!!!!!!!!!!!!!!!!!!!!!!!",import.meta.env.VITE_APP_APIKEY);
-// const fbMarcosOB=JSON.parse(fbMarcos);
-// console.log(fbMarcosOB);
-// const firebaseConfig = fbMarcosOB
-const firebaseConfig = {
 
-  apiKey:process.meta.env.VITE_APP_APIKEY,
+
+// const fbMarcosOB=JSON.parse(fbMarcos);
+const firebaseConfig = {
+  apiKey: "AIzaSyAq9AOg-sxa35Z2EflWYSg6AJb6NSXR2gU",
   authDomain: "cotizador-616a3.firebaseapp.com",
   projectId: "cotizador-616a3",
   storageBucket: "cotizador-616a3.appspot.com",
@@ -40,6 +38,8 @@ const firebaseConfig = {
   measurementId: "G-FDG9SJ15XN"
 };
 
+console.log(fbMarcosOB);
+const firebaseConfig = fbMarcosOB
 
 
 const app = initializeApp(firebaseConfig);
