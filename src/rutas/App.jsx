@@ -112,7 +112,7 @@ function App() {
       recargaDatos();
     }
   };
-
+  if(import.meta.env.MODE === "development"){ console.log("process.env.:",import.meta.env.VITE_APP_APIKEY);}
 
   return (
     <div className="App">
