@@ -23,13 +23,13 @@ import {
 
 import { useEffect, useState } from "react";
 
-const fbMarcos=import.meta.env.VITE_APP_FB;
-console.log("🚀 ~ file: firebase-config.js:27 ~ fbMarcos", fbMarcos)
-
-console.log("(!!!!!!!!!!!!!!!!!!!!!!!!!!22",import.meta.env.VITE_APP_APIKEY);
+// const fbMarcos=import.meta.env.VITE_APP_FB;
+// console.log("🚀 ~ file: firebase-config.js:27 ~ fbMarcos", fbMarcos)
 // const fbMarcosOB=JSON.parse(fbMarcos);
 // console.log(fbMarcosOB);
 // const firebaseConfig = fbMarcosOB
+
+console.log("(!!!!!!!!!!!!!!!!!!!!!!!!!!22",import.meta.env.VITE_APP_APIKEY);
 const firebaseConfig = {
 
   apiKey:import.meta.env.VITE_APP_APIKEY,
