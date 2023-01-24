@@ -1,8 +1,10 @@
 import { initializeApp } from "firebase/app";
 import  {environment2 } from "../../environment.prod";
 import { environment } from "../../environment"
-console.log(environment.firebaseConfig);
+const production= (import.meta.env.MODE === "development");
 // console.log(environment.production);
+ console.log(production);
+console.log(environment.firebaseConfig);
  console.log(environment2.firebaseConfig);
 import {
   onAuthStateChanged,
@@ -30,9 +32,8 @@ import { useEffect, useState } from "react";
 
 
 
-const production= (import.meta.env.MODE === "development");
 
- const firebaseConfig = environment ? environment.firebaseConfig : environment2.firebaseConfig;
+//  const firebaseConfig = environment ? environment.firebaseConfig : environment2.firebaseConfig;
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
