@@ -59,7 +59,7 @@ function Login2({ activa, setisUsername }) {
         >
           <p>x</p>
         </button>
-        <label onClick={activa}>
+        <label onClick={activa} >
           <h4 className="login">Puede iniciar con </h4>
           <h3 className="login btn btn--2" onClick={gooogleLog}>
             Google
@@ -92,7 +92,7 @@ function Login2({ activa, setisUsername }) {
               onChange={(e) => setpassword(e.target.value)}
             />
           </div>
-          <input type="submit" className=" btn btn--4" />
+          <input type="submit" className="btn btn--4" />
         </form>
         <div className="contBtn"> </div>
       </div>

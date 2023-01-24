@@ -165,7 +165,7 @@ function App() {
             </selsecion>  */}
           {
           
-          // selsecion()
+           selsecion()
  
        
           

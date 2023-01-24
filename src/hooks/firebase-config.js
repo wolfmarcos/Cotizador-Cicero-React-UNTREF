@@ -103,13 +103,18 @@ export const setDatos = async (datos, usid) => {
 };
 
 export const usegetDatos = (fbid1 = null) => {
+
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
 
   const getDatos = async () => {
     try {
       const docRef = doc(db, "Cotiza", fbid1);
+      console.log("🚀 ~ file: firebase-config.js:113 ~ getDatos ~ fbid1", fbid1)
+      
+      console.log("asdasdasdasdasdasdasdasdasd");
       const docSnap = await getDoc(docRef);
+  
 
       if (docSnap.exists()) {
         setData(async (set) => (set = await docSnap.data().datos));

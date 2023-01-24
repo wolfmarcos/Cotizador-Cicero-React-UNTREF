@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 function BotonGuardarBD({ cotiza={}, fbid="" }) {
+  
+  
   const [data9, error] = usegetDatos(fbid);
 
   const [guardadoCotizacion, setguardadoCotizacion] = useState([]);
@@ -19,6 +21,8 @@ function BotonGuardarBD({ cotiza={}, fbid="" }) {
 
     const df = async () => {
       const colecionCotizacion = (await data9) || null;
+      console.log("🚀 ~ file: BotonGuardarBD.jsx:22 ~ df ~ colecionCotizacion", colecionCotizacion)
+      
        if (colecionCotizacion.length > 0) {
         localStorage.setItem("items", JSON.stringify(colecionCotizacion));
         setlongitudDato((set) => (set = colecionCotizacion.length));
