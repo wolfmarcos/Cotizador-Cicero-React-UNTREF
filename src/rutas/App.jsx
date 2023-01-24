@@ -17,19 +17,21 @@ function App() {
   const [data, isLoading] = useAjax(url2);
 
   const objetoCotizar = {
-    costoM2:"",
-    propiedad:"",
-    ubicaciones:"",
-    metros2:"",
+    costoM2: "",
+    propiedad: "",
+    ubicaciones: "",
+    metros2: "",
     fecha: DataTime(),
   };
   const [cotiza, setcotiza] = useState(objetoCotizar);
 
-  if (isLoading) {return   <img
-    className="center separador"
-    src="/louf.gif"
-    alt="page not found"
-  />}
+  if (isLoading) {
+    return <img
+      className="center separador"
+      src="/louf.gif"
+      alt="page not found"
+    />
+  }
 
   function tomarData(e) {
     setcotiza((set) => ({ ...set, [e.target.name]: e.target.value }));
@@ -38,14 +40,14 @@ function App() {
   const sertifica = () => {
     console.log(cotiza.propiedad);
     if (
-      cotiza.propiedad ===" " ||
+      cotiza.propiedad === " " ||
       cotiza.propiedad == null ||
       isNaN(cotiza.propiedad)
     ) {
       Swal.fire({ title: "No ingreso tipo de propiedad", icon: "warning" });
       return false;
     } else if (
-      cotiza.ubicaciones ==="" ||
+      cotiza.ubicaciones === "" ||
       cotiza.ubicaciones == null ||
       isNaN(cotiza.ubicaciones)
     ) {
@@ -53,7 +55,7 @@ function App() {
       Swal.fire({ title: "no ingreso la ubicaciones", icon: "warning" });
       return false;
     } else if (
-      cotiza.metros2 ==="" ||
+      cotiza.metros2 === "" ||
       cotiza.metros2 == null ||
       isNaN(cotiza.metros2)
     ) {
@@ -112,13 +114,12 @@ function App() {
       recargaDatos();
     }
   };
-  if(import.meta.env.MODE === "development"){ console.log("process.env.:",import.meta.env.VITE_APP_APIKEY);}
 
   return (
     <div className="App">
-      <h1  className="center separador">
+      <h1 className="center separador">
         Seguros del hogar 22 🏡
-{/* {process.env.REACT_APP_apiKey} */}
+        {/* {process.env.REACT_APP_apiKey} */}
       </h1>
 
 

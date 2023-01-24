@@ -1,4 +1,8 @@
 import { initializeApp } from "firebase/app";
+// import  {environment } from "../../environment.prod";
+import { environment } from "../../environment"
+console.log(environment.firebaseConfig);
+console.log(environment.production);
 
 import {
   onAuthStateChanged,
@@ -9,7 +13,7 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-} from "firebase/auth" ;
+} from "firebase/auth";
 
 import {
   getFirestore,
@@ -23,30 +27,12 @@ import {
 
 import { useEffect, useState } from "react";
 
-// const fbMarcos=import.meta.env.VITE_APP_FB;
-// console.log("🚀 ~ file: firebase-config.js:27 ~ fbMarcos", fbMarcos)
-// const fbMarcosOB=JSON.parse(fbMarcos);
-// console.log(fbMarcosOB);
-// const firebaseConfig = fbMarcosOB
-
-console.log("(!!!!!!!!!!!!!!!!!!!!!!!!!!22",import.meta.env.VITE_APP_APIKEY);
-const firebaseConfig = {
-
-  apiKey:import.meta.env.VITE_APP_APIKEY,
-  authDomain: "cotizador-616a3.firebaseapp.com",
-  projectId: "cotizador-616a3",
-  storageBucket: "cotizador-616a3.appspot.com",
-  messagingSenderId: "657272668279",
-  appId: "1:657272668279:web:cc6f0fa016682995d00672",
-  measurementId: "G-FDG9SJ15XN"
-};
-
-
+ const firebaseConfig = environment.production ? environment.firebaseConfig : environment.prod.firebaseConfig;
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 export const auth = getAuth();
-const uids = null;
+// const uids = null;
 
 export const googleLogeo = async () => {
   const provider = new GoogleAuthProvider();
@@ -81,7 +67,7 @@ export const actualUser = () => {
   // const [usuario, setusuario] = useState(null);
   useEffect(() => {
     const fff = async () => {
-      
+
       onAuthStateChanged(auth, (user) => {
         if (user) {
           setenCarga(1);
@@ -106,7 +92,7 @@ export const setDatos = async (datos, usid) => {
       return true;
     } else {
     }
-  } catch (error) {}
+  } catch (error) { }
 
   return;
 };
@@ -122,9 +108,9 @@ export const usegetDatos = (fbid1 = null) => {
 
       if (docSnap.exists()) {
         setData(async (set) => (set = await docSnap.data().datos));
-      
+
       } else {
-   
+
       }
     } catch (error) {
       setError(true);
