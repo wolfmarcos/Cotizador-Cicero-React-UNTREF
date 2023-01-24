@@ -114,6 +114,28 @@ function App() {
       recargaDatos();
     }
   };
+  // if (enCarga===1 ) {
+    
+  // }
+  // else{
+
+  // }
+  const selsecion=()=>{
+    if(enCarga==1) {console.log("teta1");
+     return <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
+    }else{
+      console.log("pepe2");
+      return(
+      <div onClick={deslogeado}>
+        <h1 button className="button guardado">
+          💾
+        </h1>
+        <label>
+          "Para guardatodas sus cotizacionse debe estar registrado"
+        </label>
+      </div>)
+    }
+  }
 
   return (
     <div className="App">
@@ -122,7 +144,7 @@ function App() {
         {/* {process.env.REACT_APP_apiKey} */}
       </h1>
 
-
+     
       <div className=" center div-cotizador">
         <FormCotizador
           tomarData={tomarData}
@@ -138,18 +160,30 @@ function App() {
             <span id="valorPoliza">{cotiza.costoM2 || "00.0"}</span>
           </p>
           {/* (typeof usuario)!="String" */}
-          {enCarga == 1 ? (
-            <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
-          ) : (
-            <div onClick={deslogeado}>
-              <h1 button className="button guardado">
-                💾
-              </h1>
-              <label>
-                "Para guardatodas sus cotizacionse debe estar registrado"
-              </label>
-            </div>
-          )}
+          
+          {/* <selsecion>
+            </selsecion>  */}
+          {
+          
+          // selsecion()
+ 
+       
+          
+          // (enCarga===1) ? (
+          //   <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
+          // ) : (
+          //   <div onClick={deslogeado}>
+          //     <h1 button className="button guardado">
+          //       💾
+          //     </h1>
+          //     <label>
+          //       "Para guardatodas sus cotizacionse debe estar registrado"
+          //     </label>
+          //   </div>
+          // )
+          
+          
+          }
         </div>
       </div>
     </div>
