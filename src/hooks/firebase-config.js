@@ -27,6 +27,9 @@ import {
 
 import { useEffect, useState } from "react";
 
+
+
+
 const production= (import.meta.env.MODE === "development");
 
  const firebaseConfig = environment ? environment.firebaseConfig : environment2.firebaseConfig;
