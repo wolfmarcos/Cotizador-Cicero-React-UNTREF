@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
-// import  {environment } from "../../environment.prod";
+import  {environment2 } from "../../environment.prod";
 import { environment } from "../../environment"
 console.log(environment.firebaseConfig);
 console.log(environment.production);
-
+ console.log(environment2.firebaseConfig);
 import {
   onAuthStateChanged,
   getRedirectResult,
@@ -27,7 +27,7 @@ import {
 
 import { useEffect, useState } from "react";
 
- const firebaseConfig = environment.production ? environment.firebaseConfig : environment.prod.firebaseConfig;
+ const firebaseConfig = environment.production ? environment.firebaseConfig : environment2.firebaseConfig;
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
