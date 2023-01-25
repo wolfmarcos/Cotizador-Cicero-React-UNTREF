@@ -114,12 +114,7 @@ function App() {
       recargaDatos();
     }
   };
-  // if (enCarga===1 ) {
-    
-  // }
-  // else{
 
-  // }
   const selsecion=()=>{
     if(enCarga==1) {console.log("teta1");
      return <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
@@ -161,11 +156,10 @@ function App() {
           </p>
           {/* (typeof usuario)!="String" */}
           
-          {/* <selsecion>
-            </selsecion>  */}
+  
           {
           
-          //  selsecion()
+           selsecion()
  
        
           
