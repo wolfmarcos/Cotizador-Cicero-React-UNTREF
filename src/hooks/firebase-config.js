@@ -4,8 +4,8 @@ import { environment } from "../../environment"
 const production= (import.meta.env.MODE === "development");
 // console.log(environment.production);
  console.log(production);
-console.log(environment.firebaseConfig);
- console.log(environment2.firebaseConfig);
+//console.log(environment.firebaseConfig);
+ //console.log(environment2.firebaseConfig);
 import {
   onAuthStateChanged,
   getRedirectResult,
