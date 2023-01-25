@@ -8,8 +8,8 @@ const production= (import.meta.env.MODE === "development");
 // console.log(environment.firebaseConfig);
 //  console.log(environment2.firebaseConfig);
 
-//console.log(environment.firebaseConfig);
- //console.log(environment2.firebaseConfig);
+console.log(environment.firebaseConfig);
+console.log(environment2.firebaseConfig);
 
 import {
   onAuthStateChanged,
