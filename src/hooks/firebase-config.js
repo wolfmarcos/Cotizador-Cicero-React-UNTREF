@@ -4,8 +4,8 @@ import { environment } from "../../environment"
 const production= (import.meta.env.MODE === "development");
 // console.log(environment.production);
  console.log(production);
-console.log(environment.firebaseConfig);
- console.log(environment2.firebaseConfig);
+// console.log(environment.firebaseConfig);
+//  console.log(environment2.firebaseConfig);
 import {
   onAuthStateChanged,
   getRedirectResult,
@@ -33,7 +33,7 @@ import { useEffect, useState } from "react";
 
 
 
-//  const firebaseConfig = environment ? environment.firebaseConfig : environment2.firebaseConfig;
+const firebaseConfig = environment ? environment.firebaseConfig : environment2.firebaseConfig;
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
