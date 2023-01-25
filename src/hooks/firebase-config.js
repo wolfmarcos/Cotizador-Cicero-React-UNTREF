@@ -38,7 +38,7 @@ import { useEffect, useState } from "react";
 
 
 
-const firebaseConfig = environment ? environment.firebaseConfig : environment2.firebaseConfig;
+const firebaseConfig = !environment ? environment.firebaseConfig : environment2.firebaseConfig;
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
