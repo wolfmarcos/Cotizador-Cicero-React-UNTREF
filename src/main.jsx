@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
       <Routes>
         <Route path="/ErrorPage" element={<ErrorPage />}></Route>
-        <Route path="/" element={<Navigate to="/cotizador" />}></Route>
+        <Route path="*" element={<Navigate to="/cotizador" />}></Route>
         <Route path="/cotizador" element={<App />}></Route>
 
         <Route element={<RutaProtegida />}>

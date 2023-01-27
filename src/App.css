@@ -50,16 +50,12 @@ label {
     border-radius: 0.7rem;
     display: flex;
     flex-direction: column;
-
-
 }
 
 div.historial {
     cursor: pointer;
-
     padding: 6px;
     border-radius: 25px;
-
     margin: 1vw;
     position: absolute;
     top: 0;
