@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useState, useReft, useEffect } from "react";
+import { useRef } from "react";
+
 import Login2 from "./Login2";
 import { desLogGoogle } from "./hooks/firebase-config";
 import Swal from "sweetalert2";
@@ -77,11 +79,22 @@ function Nav() {
     setactiva(!activa);
   };
 
+  const inputElement = useRef("");
+
+  const focus2 = () => {
+    inputElement.current.classList.toggle("visiblitiBTN");
+    console.log("asdasdasdasdasd");
+  };
+
+
   return (
     <nav>
-      <div></div>
+      <div  onClick={focus2}>
+      <i  class="fa-solid fa-bars"></i>
 
-      <div>
+      </div>
+
+      <div >
         <NavLink
           className={({ isActive }) =>
             isActive ? "button " : "button blanco "
@@ -99,7 +112,8 @@ function Nav() {
           Historial
         </NavLink>
       </div>
-      <div className="contenedor">
+      
+      <div ref={inputElement} className=" menuUser">
         {userInfo?.nombre ? (
           <div onClick={desLogo} className="button button-outline ">
             {" "}
