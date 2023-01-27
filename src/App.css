@@ -159,6 +159,7 @@ z-index: 100;
     background-color: azure;
     box-shadow: 2px 2px 21px rgba(216, 112, 147, 0.548);
     border-radius: 5px;
+    transition: all 0.5s;
 }
 .visiblitiBTN>.contForm {
     margin-left: 140%;
