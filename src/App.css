@@ -154,7 +154,8 @@ z-index: 100;
     visibility: visible; 
    margin: 3px;
     transform: translate(2px ,33px);
-    width:120px;
+    
+   min-width:120px;
     text-align: center;
     background-color: azure;
     box-shadow: 2px 2px 21px rgba(216, 112, 147, 0.548);
