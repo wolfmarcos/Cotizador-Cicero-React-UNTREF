@@ -16,15 +16,16 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Nav />
 
       <Routes>
-        <Route path="/ErrorPage" element={<ErrorPage />}></Route>
+       
+         <Route index element={ <App /> }></Route>
         <Route path="*" element={<Navigate to="/cotizador" />}></Route>
         <Route path="/cotizador" element={<App />}></Route>
 
         <Route element={<RutaProtegida />}>
           <Route path="/historial" element={<Historial />}>
-            {/* <Route path=":id" element={<ErrorPage />}></Route> */}
-            {/* <Route path=":*" element={<ErrorPage />}></Route> */}
+            <Route path="*" element={<ErrorPage />}></Route> 
           </Route>
+            <Route path=":*" element={<ErrorPage />}></Route> 
         </Route>
       </Routes>
     </BrowserRouter>
