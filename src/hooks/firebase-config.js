@@ -2,14 +2,10 @@ import { initializeApp } from "firebase/app";
 import  {environment2 } from "../../environment.prod";
 import { environment } from "../../environment"
 const production= (import.meta.env.MODE === "development");
-// console.log(environment.production);
+
  console.log(production);
 
-//  console.log(environment.firebaseConfig);
-//  console.log(environment2.firebaseConfig);
 
-//console.log(environment.firebaseConfig);
- //console.log(environment2.firebaseConfig);
 
 import {
   onAuthStateChanged,
@@ -43,7 +39,7 @@ const firebaseConfig = environment ? environment.firebaseConfig : environment2.f
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 export const auth = getAuth();
-// const uids = null;
+
 
 export const googleLogeo = async () => {
   const provider = new GoogleAuthProvider();
@@ -116,9 +112,9 @@ export const usegetDatos = (fbid1 = null) => {
   const getDatos = async () => {
     try {
       const docRef = doc(db, "Cotiza", fbid1);
-      console.log("🚀 ~ file: firebase-config.js:113 ~ getDatos ~ fbid1", fbid1)
+   
       
-      console.log("asdasdasdasdasdasdasdasdasd");
+  
       const docSnap = await getDoc(docRef);
   
 

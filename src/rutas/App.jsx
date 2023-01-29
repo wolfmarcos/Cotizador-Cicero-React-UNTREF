@@ -38,7 +38,7 @@ function App() {
   }
 
   const sertifica = () => {
-    console.log(cotiza.propiedad);
+    
     if (
       cotiza.propiedad === " " ||
       cotiza.propiedad == null ||
@@ -51,7 +51,7 @@ function App() {
       cotiza.ubicaciones == null ||
       isNaN(cotiza.ubicaciones)
     ) {
-      console.log(cotiza.ubicaciones, typeof cotiza.ubicaciones);
+     
       Swal.fire({ title: "no ingreso la ubicaciones", icon: "warning" });
       return false;
     } else if (
@@ -89,13 +89,13 @@ function App() {
       propiedad: propiedad[0].tipo,
       ubicaciones: ubicaciones[0].tipo,
     }));
-    console.log("alta mierda", cotiza);
+
   };
 
   const funcionCotizar = (e) => {
     e.preventDefault();
     const datosCompletados = sertifica();
-    console.log(datosCompletados);
+    
     if (datosCompletados) {
       Swal.fire({
         position: "center",
@@ -116,10 +116,10 @@ function App() {
   };
 
   const selsecion=()=>{
-    if(enCarga==1) {console.log("teta1");
+    if(enCarga==1) {
      return <BotonGuardarBD cotiza={cotiza} fbid={fbid} />
     }else{
-      console.log("pepe2");
+      
       return(
       <div onClick={deslogeado}>
         <h1 button className="button guardado">

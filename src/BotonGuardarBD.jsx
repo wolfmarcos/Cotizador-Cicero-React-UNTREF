@@ -14,14 +14,11 @@ function BotonGuardarBD({ cotiza={}, fbid="" }) {
 
  useEffect(() => {
     const local2 = JSON.parse(localStorage.getItem("items")) || [];
-    console.log(
-      "🚀 ~ file: BotonGuardarBD.jsx:26 ~ useEffect ~ local2",
-      local2
-    );
+  
 
     const df = async () => {
       const colecionCotizacion = (await data9) || null;
-      console.log("🚀 ~ file: BotonGuardarBD.jsx:22 ~ df ~ colecionCotizacion", colecionCotizacion)
+      
       
        if (colecionCotizacion.length > 0) {
         localStorage.setItem("items", JSON.stringify(colecionCotizacion));
