@@ -92,7 +92,7 @@ function Login2({ activa, setisUsername }) {
               onChange={(e) => setpassword(e.target.value)}
             />
           </div>
-          <input type="submit" className="btn btn--4" />
+          <input type="submit" value="envio" className="btn btn--4" />
         </form>
         <div className="contBtn"> </div>
       </div>
