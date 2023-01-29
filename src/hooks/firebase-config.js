@@ -3,7 +3,7 @@ import  {environment2 } from "../../environment.prod";
 import { environment } from "../../environment"
 const production= (import.meta.env.MODE === "development");
 
- console.log(production);
+ console.log("desarrollo:",production);
 
 
 
