@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import  {environment2 } from "../../environment.prod";
 import { environment } from "../../environment"
+
+
 const production= (import.meta.env.MODE === "development");
 
  console.log("desarrollo:",production);

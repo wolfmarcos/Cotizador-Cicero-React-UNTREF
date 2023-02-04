@@ -126,7 +126,7 @@ function App() {
           💾
         </h1>
         <label>
-          "Para guardatodas sus cotizacionse debe estar registrado"
+          "Para guardar sus cotizaciones debe estar registrado"
         </label>
       </div>)
     }
@@ -135,7 +135,13 @@ function App() {
   return (
     <div className="App"> 
       <h1 className="center separador">
-        Seguros del hogar 22 🏡
+         🏡
+        Seguros del hogar por 
+        <a className=" btn--2" target="_blank" href="https://wolfmarcos.github.io/CV-Marcos-Cicero">
+         <h1> Marcos Cicero </h1>
+          
+          </a>
+       
         {/* {process.env.REACT_APP_apiKey} */}
       </h1>
 
